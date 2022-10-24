@@ -19,6 +19,10 @@ const routes = [
       title: "后台管理系统"
     }
   },
+  {
+    path: '/index',
+    redirect: '/'
+  }
 ]
 
 const router = createRouter({
