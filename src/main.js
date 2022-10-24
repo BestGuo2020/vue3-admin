@@ -1,4 +1,16 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-createApp(App).mount('#app')
+import router from './router'
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import Particles from 'particles.vue3';
+
+const app = createApp(App)
+
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component)
+}
+
+app.use(router)
+app.use(Particles)
+app.mount('#app')
