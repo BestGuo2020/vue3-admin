@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import generateRoutes from "./routeGenerate";
 
 import Layout from '@/views/layout/Layout'
 
@@ -15,14 +16,12 @@ const routes = [
     component: Layout,
     path: '/',
     name: '后台管理系统',
-    meta: {
-      title: "后台管理系统"
-    }
   },
   {
     path: '/index',
     redirect: '/'
-  }
+  },
+  ...generateRoutes
 ]
 
 const router = createRouter({
