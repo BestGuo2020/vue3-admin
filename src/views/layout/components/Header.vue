@@ -1,33 +1,43 @@
 <template>
-  <el-icon :size="20" class="icon-style icon-collapse">
-    <Expand v-if="collapse" @click="handleCollapse" />
-    <Fold v-if="!collapse" @click="handleCollapse" />
-  </el-icon>
+  <div @click="handleCollapse">
+    <el-icon :size="20" class="icon-style icon-collapse">
+      <Expand v-if="collapse" />
+      <Fold v-if="!collapse" />
+    </el-icon>
+  </div>
+  <div style="flex-shrink: 1"></div>
   <div class="toolbar">
-    <el-icon class="icon-style icon-fullsceen">
-      <EnterFullScreen @click="toggleFullscreen" v-if="!fullScreen" />
-      <ExitFullScreen @click="toggleFullscreen" v-else />
+    <el-icon class="icon-style icon-fullsceen" @click="toggleFullscreen">
+      <EnterFullScreen v-if="!fullScreen" />
+      <ExitFullScreen v-else />
     </el-icon>
     <el-icon class="icon-style icon-notice">
       <el-badge is-dot>
         <Notification />
       </el-badge>
     </el-icon>
-    <div class="brief-info">
-      <el-avatar class="brief-avater" :size="34" src="http://avatarurl">
-        <img :src="avatar" />
-      </el-avatar>
-      <span>BestGuo2020</span>
-    </div>
+    <el-dropdown>
+      <div class="brief-info">
+        <el-avatar class="brief-avater" :size="34" src="http://avatarurl">
+          <img :src="avatar" />
+        </el-avatar>
+        <span>BestGuo2020</span>
+      </div>
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item>退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
   </div>
 </template>
 
 <script setup>
 import emitter from "@/utils/bus";
-import screenfull from 'screenfull'
+import screenfull from "screenfull";
 
-import EnterFullScreen from '@/components/icons/EnterFullScreen.vue'
-import ExitFullScreen from '@/components/icons/ExitFullScreen.vue'
+import EnterFullScreen from "@/components/icons/EnterFullScreen.vue";
+import ExitFullScreen from "@/components/icons/ExitFullScreen.vue";
 
 // 定义并关闭左侧菜单折叠
 const collapse = ref(true);
@@ -40,18 +50,17 @@ function handleCollapse() {
 const avatar = "https://avatars.githubusercontent.com/u/45250038?v=4";
 
 // 全屏
-let fullScreen = ref(false)
+let fullScreen = ref(false);
 function toggleFullscreen() {
-  if(screenfull.isEnabled) {
+  if (screenfull.isEnabled) {
     if (!screenfull.isFullscreen) {
-      screenfull.toggle()
+      screenfull.toggle();
     } else {
-      screenfull.exit()
+      screenfull.exit();
     }
     fullScreen.value = !fullScreen.value;
   }
 }
-
 </script>
 
 <style lang="scss">
@@ -76,7 +85,7 @@ function toggleFullscreen() {
   cursor: pointer;
 }
 .icon-notice {
-  margin-top: 4px; 
+  padding-top: 2px !important; 
   font-size: 20px;
   padding: 0 10px;
 }
@@ -84,11 +93,14 @@ function toggleFullscreen() {
   padding-right: 15px;
   font-size: 14px;
   display: inline-flex;
-  height: 100%;
+  height: 57px;
   align-items: center;
   cursor: pointer;
 }
-.brief-info:hover, .icon-collapse:hover, .icon-fullsceen:hover, .icon-notice:hover {
+.brief-info:hover,
+.icon-collapse:hover,
+.icon-fullsceen:hover,
+.icon-notice:hover {
   background-color: #f6f6f6;
 }
 .brief-avater {
@@ -98,7 +110,6 @@ function toggleFullscreen() {
   padding: 0 15px;
 }
 .icon-fullsceen {
-  margin-top: 1px; 
   font-size: 20px;
   padding: 0 10px;
 }
