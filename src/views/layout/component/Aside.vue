@@ -1,6 +1,7 @@
 <template>
   <el-aside width="auto">
     <el-scrollbar>
+      <!-- 开启路由模式，使每个菜单中的 index 属性变成 url -->
       <el-menu router :collapse="fold">
         <!-- 循环遍历其路由数据 -->
         <template v-for="item in generateRoutes" :key="item.name">

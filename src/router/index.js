@@ -12,15 +12,6 @@ const routes = [
       title: "登录"
     }
   },
-  {
-    component: Layout,
-    path: '/',
-    name: '后台管理系统',
-  },
-  {
-    path: '/index',
-    redirect: '/'
-  },
   ...generateRoutes
 ]
 
