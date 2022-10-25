@@ -2,7 +2,7 @@
   <el-container class="layout-container">
     <!-- 侧边栏 -->
     <V3Aside :fold="collapse"></V3Aside>
-    
+
     <el-container>
       <!-- 头部 -->
       <el-header style="display: flex; justify-content: space-between;">
@@ -47,9 +47,11 @@ const collapse = ref(false)
 }
 .layout-container .el-header {
   position: relative;
-  background-color: var(--el-color-primary-light-7);
+  background-color: white;
   color: var(--el-text-color-primary);
   font-size: 12px;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  --el-header-height: 59px;
 }
 .layout-container .el-main {
   padding: 0;
