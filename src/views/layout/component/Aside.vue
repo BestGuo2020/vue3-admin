@@ -1,5 +1,5 @@
 <template>
-  <el-aside :width="fold ? '64px' : '240px'">
+  <el-aside width="auto">
     <el-scrollbar>
       <el-menu router :collapse="fold">
         <!-- 循环遍历其路由数据 -->
@@ -9,10 +9,10 @@
             v-if="item.children && item.children.length === 1"
             :index="'/' + item.children[0].path"
           >
-            <el-icon><DataBoard /></el-icon
-            ><span>{{ item.children[0].name }}</span>
+            <el-icon><DataBoard /></el-icon>
+            <span>{{ item.children[0].name }}</span>
           </el-menu-item>
-          <!-- 遍历菜单有多个时，遍历子菜单，同时要附带下拉框 -->
+          <!-- 子菜单有多个时，遍历子菜单，同时要附带下拉图标，没有子菜单项的就不展示 -->
           <el-sub-menu
             v-else-if="item.children && item.children.length > 1"
             :index="item.path"
@@ -51,21 +51,43 @@ const props = defineProps({
 .layout-container .el-menu {
   border-right: none;
 }
-.el-menu-vertical:not(.el-menu--collapse) {
+.el-menu--inline {
+    background: transparent;
+  }
+/* 处理菜单折叠时字体和图标不消失的问题，以及菜单默认宽 */
+.el-menu--vertical:not(.el-menu--collapse) {
   width: 200px;
   :deep(.el-sub-menu__icon-arrow) {
     display: block;
   }
 }
-
-.el-menu-vertical {
-  font-weight: bold;
+.el-menu--vertical {
   box-shadow: 0 0 10px rgb(0 0 0 / 20%);
-  height: calc(100vh - 40px);
-  z-index: 10;
+  height: 100vh;
+  background: rgb(41, 118, 204);
+  background-size: 150% 150%;
 
   :deep(.el-sub-menu__icon-arrow) {
     display: none;
   }
+}
+/* 处理侧边菜单字体，点击状态等 */
+.el-menu-item.is-active {
+  color: #fff !important;
+  opacity: 1;
+  background: hsla(0,0%,100%,.23);
+}
+.el-menu-item, .el-sub-menu__title {
+  color: #fff;
+  height: 60px;
+}
+.el-menu-item:hover, .el-sub-menu__title:hover {
+  color: #fff;
+  opacity: 1;
+  background: hsla(0,0%,100%,.23);
+}
+.is-opened {
+  opacity: 1;
+  background: hsla(0,0%,100%,.05);
 }
 </style>
