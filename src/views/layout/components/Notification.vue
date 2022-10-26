@@ -5,8 +5,10 @@
     </el-badge>
   </el-icon>
 
-  <!-- 消息实体 -->
-  <el-drawer v-model="drawer" :title="title">
+  <!-- 通知实体 -->
+  <el-drawer v-model="drawer" class="drawer-message" :with-header="false">
+    <!-- 标题 -->
+    <div class="drawer-title">{{ title }}</div>
     <!-- 操作按钮 -->
     <el-button-group>
       <el-button type="success" @click="handleReadAll">全部已读</el-button>
@@ -152,10 +154,11 @@ function handleDeleteAll() {
 .card-header span {
   display: block;
 }
-.el-card__header {
-  padding: 4px 10px;
+.drawer-title {
+  padding-bottom: 16px;
+  font-size: 16px;
 }
-.el-drawer__header {
+.drawer-message ::v-deep( .el-drawer__header) {
   margin: 0;
   padding-bottom: 20px;
   border-bottom: 1px solid #dddddd;
