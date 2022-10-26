@@ -10,6 +10,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('@/assets/font-awesome/css/all.min.css');
 body {
   margin: 0;
 }

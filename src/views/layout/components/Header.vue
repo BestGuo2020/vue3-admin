@@ -1,19 +1,19 @@
 <template>
   <div @click="handleCollapse">
-    <el-icon :size="20" class="icon-style icon-collapse">
-      <Expand v-if="collapse" />
-      <Fold v-if="!collapse" />
+    <el-icon :size="18" class="icon-style icon-collapse">
+      <i class="fa fa-angle-double-right" aria-hidden="true" v-if="collapse"></i>
+      <i class="fa fa-angle-double-left" aria-hidden="true" v-else></i>
     </el-icon>
   </div>
   <div style="flex-shrink: 1"></div>
   <div class="toolbar">
-    <el-icon class="icon-style icon-fullsceen" @click="toggleFullscreen">
-      <EnterFullScreen v-if="!fullScreen" />
-      <ExitFullScreen v-else />
+    <el-icon :size="18" class="icon-style icon-fullsceen" @click="toggleFullscreen">
+      <i class="fa fa-expand" aria-hidden="true" v-if="!fullScreen" ></i>
+      <i class="fa fa-compress" aria-hidden="true" v-else></i>
     </el-icon>
     <el-icon class="icon-style icon-notice">
       <el-badge is-dot>
-        <Notification />
+        <i class="fa-regular fa-bell"></i>
       </el-badge>
     </el-icon>
     <el-dropdown>
@@ -70,7 +70,7 @@ function toggleFullscreen() {
   color: var(--el-text-color-primary);
   font-size: 12px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  --el-header-height: 59px;
+  --el-header-height: 60px;
   --el-header-padding: 0;
 }
 .layout-container .toolbar {
@@ -85,7 +85,6 @@ function toggleFullscreen() {
   cursor: pointer;
 }
 .icon-notice {
-  padding-top: 2px !important; 
   font-size: 20px;
   padding: 0 10px;
 }
@@ -110,7 +109,6 @@ function toggleFullscreen() {
   padding: 0 15px;
 }
 .icon-fullsceen {
-  font-size: 20px;
   padding: 0 10px;
 }
 </style>

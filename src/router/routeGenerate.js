@@ -5,6 +5,7 @@ const generateRoutes = [
     component: Layout,
     path: '/',
     name: '仪表板',
+    icon: 'fa-solid fa-gauge',
     children: [
       {
         path: 'dashboard',
@@ -17,6 +18,7 @@ const generateRoutes = [
     component: Layout,
     path: '/system',
     name: '系统设置',
+    icon: 'fa-solid fa-gear',
     children: [
       {
         path: 'user',

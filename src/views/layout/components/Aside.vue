@@ -9,7 +9,7 @@
             v-if="item.children && item.children.length === 1"
             :index="'/' + item.children[0].path"
           >
-            <el-icon><DataBoard /></el-icon>
+            <el-icon :class="item.icon"></el-icon>
             <span>{{ item.children[0].name }}</span>
           </el-menu-item>
           <!-- 子菜单有多个时，遍历子菜单，同时要附带下拉图标，没有子菜单项的就不展示 -->
@@ -18,7 +18,7 @@
             :index="item.path"
           >
             <template #title>
-              <el-icon><setting /></el-icon><span>{{ item.name }}</span>
+              <el-icon :class="item.icon"></el-icon><span>{{ item.name }}</span>
             </template>
             <el-menu-item
               v-for="subitem in item.children"
