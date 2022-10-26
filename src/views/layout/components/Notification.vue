@@ -9,10 +9,12 @@
   <el-drawer v-model="drawer" :title="title">
     <!-- 操作按钮 -->
     <el-button-group>
-      <el-button type="success">全部已读</el-button>
-      <el-button type="danger">全部删除</el-button>
+      <el-button type="success" @click="handleReadAll">全部已读</el-button>
+      <el-button type="danger" @click="handleDeleteAll">全部删除</el-button>
     </el-button-group>
     <!-- 消息 -->
+    <el-scrollbar style="margin: 10px 0">
+    <el-empty v-if="notificationData.length === 0" description="还没有消息呢" />
     <el-card
       class="box-card"
       shadow="never"
@@ -50,10 +52,12 @@
       </template>
       <div style="line-height: 1.5em">{{ notification.content }}</div>
     </el-card>
+  </el-scrollbar>
   </el-drawer>
 </template>
 
 <script setup>
+import { warningConfirm } from '@/utils/messageBox'
 // 消息通知数据
 const notificationData = ref([
   {
@@ -78,22 +82,42 @@ const notificationData = ref([
 let drawer = ref(false);
 // 消息标题
 let title = ref(`消息`);
-// 消息个数
-let count = ref(2);
+// 未读消息个数
+let count = ref(0);
 
-// 监听消息个数
+// 监听未读消息个数
 watch(notificationData, () => {
-  count.value = notificationData.value.length;
-});
+  count.value = notificationData.value.filter(item => !item.read).length;
+  title.value = count.value === 0 ? `消息` : `消息（${count.value}）`
+}, { immediate: true, deep: true });
 
 // 改变已读消息的状态
 function handleReadMessage(item) {
   let refRead = toRef(item, 'read');
   refRead.value = true;
 }
+// 改变所有
+function handleReadAll() {
+  notificationData.value = notificationData.value.map(item => {
+    if(!item.read) {
+      item.read = true;
+    }
+    return item;
+  });
+}
 
 // 删除消息
-function handleDeleteMessage(item) {}
+function handleDeleteMessage(item) {
+  warningConfirm('确定删除该条通知？').then(() => {
+    notificationData.value = notificationData.value.filter(elem => elem !== item);
+  }).catch(() => {});
+}
+// 删除所有
+function handleDeleteAll() {
+  warningConfirm('确定全部删除？').then(() => {
+    notificationData.value = [];
+  }).catch(() => {});
+}
 </script>
 
 <style>
@@ -115,6 +139,9 @@ function handleDeleteMessage(item) {}
   margin: 0;
   padding-bottom: 20px;
   border-bottom: 1px solid #dddddd;
+}
+.el-drawer__body {
+  /* overflow: hidden; */
 }
 .tag-style {
   margin-top: 2px;
