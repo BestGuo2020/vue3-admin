@@ -1,21 +1,25 @@
 <template>
   <div @click="handleCollapse">
     <el-icon :size="18" class="icon-style icon-collapse">
-      <i class="fa fa-angle-double-right" aria-hidden="true" v-if="collapse"></i>
+      <i
+        class="fa fa-angle-double-right"
+        aria-hidden="true"
+        v-if="collapse"
+      ></i>
       <i class="fa fa-angle-double-left" aria-hidden="true" v-else></i>
     </el-icon>
   </div>
   <div style="flex-shrink: 1"></div>
   <div class="toolbar">
-    <el-icon :size="18" class="icon-style icon-fullsceen" @click="toggleFullscreen">
-      <i class="fa fa-expand" aria-hidden="true" v-if="!fullScreen" ></i>
+    <el-icon
+      :size="18"
+      class="icon-style icon-fullsceen"
+      @click="toggleFullscreen"
+    >
+      <i class="fa fa-expand" aria-hidden="true" v-if="!fullScreen"></i>
       <i class="fa fa-compress" aria-hidden="true" v-else></i>
     </el-icon>
-    <el-icon class="icon-style icon-notice">
-      <el-badge is-dot>
-        <i class="fa-regular fa-bell"></i>
-      </el-badge>
-    </el-icon>
+    <Notification></Notification>
     <el-dropdown>
       <div class="brief-info">
         <el-avatar class="brief-avater" :size="34" src="http://avatarurl">
@@ -36,8 +40,7 @@
 import emitter from "@/utils/bus";
 import screenfull from "screenfull";
 
-import EnterFullScreen from "@/components/icons/EnterFullScreen.vue";
-import ExitFullScreen from "@/components/icons/ExitFullScreen.vue";
+import Notification from './Notification.vue';
 
 // 定义并关闭左侧菜单折叠
 const collapse = ref(true);

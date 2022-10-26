@@ -18,7 +18,7 @@ const generateRoutes = [
     component: Layout,
     path: '/system',
     name: '系统设置',
-    icon: 'fa-solid fa-gear',
+    icon: 'fa-solid fa-gears',
     children: [
       {
         path: 'user',
