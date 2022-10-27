@@ -8,21 +8,30 @@
         <el-form-item prop="username">
           <el-input
             type="text"
-            prefix-icon="User"
             v-model="loginForm.username"
             placeholder="用户名"
-          />
+          >
+            <template #prefix>
+              <el-icon class="fa-solid fa-circle-user"></el-icon>
+            </template>
+          </el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input
             type="password"
-            prefix-icon="Lock"
             v-model="loginForm.password"
             placeholder="密码"
-          />
+          >
+            <template #prefix>
+              <el-icon class="fa-solid fa-lock"></el-icon>
+            </template>
+          </el-input>
         </el-form-item>
         <div class="login-item">
-          <el-button type="primary" class="login-btn" @click="login(ruleFormRef)">登录</el-button>
+          <el-button
+            type="primary"
+            class="login-btn"
+            @click="login(ruleFormRef)">登录</el-button>
         </div>
       </el-form>
     </div>
@@ -30,8 +39,8 @@
 </template>
 
 <script setup>
-import bg from './components/Background.vue';
-import { post } from '@/request/utils';
+import bg from "./components/Background.vue";
+import { post } from "@/request/utils";
 
 // 登录表单中的数据
 const loginForm = reactive({
@@ -39,26 +48,23 @@ const loginForm = reactive({
   password: "111111",
 });
 
-const ruleFormRef = ref() // 定义一个 ref 用于直接获取表单的信息
+const ruleFormRef = ref(); // 定义一个 ref 用于直接获取表单的信息
 
 // 定义校验的规则
 const formRules = {
-  username: [
-    { required: true, message: '请输入用户名', trigger: 'blur' },
-  ],
+  username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
   password: [
-    { required: true, message: '请输入密码', trigger: 'blur' },
-    { min: 6, max: 18, message: '密码长度必须在6-18之间', trigger: 'blur' },
-  ]
+    { required: true, message: "请输入密码", trigger: "blur" },
+    { min: 6, max: 18, message: "密码长度必须在6-18之间", trigger: "blur" },
+  ],
 };
 
 // 登录操作
 async function login(formEl) {
-
   const { username, password } = loginForm;
   console.log(`用户名：${username}，密码：${password}`);
 
-  if(!formEl) {
+  if (!formEl) {
     return;
   }
 
@@ -66,14 +72,21 @@ async function login(formEl) {
   await formEl.validate((valid, fields) => {
     if (valid) {
       // 登录
-      post('/login', { username, password }).then(res => {
-        
+      post("/api/login", { username, password }).then((res) => {
+        console.log(res);
+        if (res.code === 0) {
+          ElMessage({
+            type: "success",
+            message: res.msg,
+          });
+        } else {
+          ElMessage.error(res.msg);
+        }
       });
     } else {
-      console.log('error submit!', fields)
+      console.log("error submit!", fields);
     }
-  })
-
+  });
 }
 </script>
 
@@ -102,11 +115,11 @@ async function login(formEl) {
   }
 
   .login-item {
-    width: 100%; text-align: center;
+    width: 100%;
+    text-align: center;
   }
   .login-btn {
     width: 200px;
   }
-
 }
 </style>
