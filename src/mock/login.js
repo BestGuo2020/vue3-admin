@@ -7,7 +7,12 @@ export default [
       if(username === "admin" && password === "123456") {
         return {
           code: 0,
-          msg: '登录成功！'
+          msg: '登录成功！',
+          data: {
+            username,
+            roles: ['admin'],
+            header: 'https://avatars.githubusercontent.com/u/45250038?v=4'
+          }
         }
       } else {
         return {
