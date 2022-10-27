@@ -14,7 +14,7 @@
       <el-button type="success" @click="handleReadAll">全部已读</el-button>
       <el-button type="danger" @click="handleDeleteAll">全部删除</el-button>
     </el-button-group>
-    <!-- 消息 -->
+    <!-- 消息内容 -->
     <el-scrollbar style="margin: 10px 0;">
       <el-empty
         v-if="notificationData.length === 0"
@@ -79,11 +79,14 @@ const notificationData = ref([
   },
 ]);
 
-for (let i = 10; i > 0; i--) {
+function loadMessage() {
+
+  let length = notificationData.value.length++;
+
   notificationData.value.push({
-    id: `${i}`,
+    id: `${length}`,
     time: "2022-10-23",
-    title: `标题${i}`,
+    title: `标题${length}`,
     content: "vue3-admin 项目启动",
     type: "info",
     read: false,
@@ -158,13 +161,11 @@ function handleDeleteAll() {
   padding-bottom: 16px;
   font-size: 16px;
 }
-.drawer-message ::v-deep( .el-drawer__header) {
-  margin: 0;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #dddddd;
+::v-deep .el-card__header {
+  padding: 4px 10px;
 }
 .el-scrollbar {
-  height: calc(100% - 52px);
+  height: 87.0991249%;
 }
 .tag-style {
   margin-top: 2px;
