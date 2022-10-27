@@ -30,8 +30,10 @@
         <div class="login-item">
           <el-button
             type="primary"
+            :loading="loading"
             class="login-btn"
-            @click="login(ruleFormRef)">登录</el-button>
+            @click="login(ruleFormRef)">登录
+          </el-button>
         </div>
       </el-form>
     </div>
@@ -41,12 +43,19 @@
 <script setup>
 import bg from "./components/Background.vue";
 import { post } from "@/request/utils";
+import { useRouter } from "vue-router";
+
+// 路由引入
+const router = useRouter();
 
 // 登录表单中的数据
 const loginForm = reactive({
   username: "admin",
   password: "111111",
 });
+
+// 登录按钮状态
+const loading = ref(false);
 
 const ruleFormRef = ref(); // 定义一个 ref 用于直接获取表单的信息
 
@@ -61,26 +70,29 @@ const formRules = {
 
 // 登录操作
 async function login(formEl) {
-  const { username, password } = loginForm;
-  console.log(`用户名：${username}，密码：${password}`);
-
   if (!formEl) {
     return;
   }
-
+  const { username, password } = loginForm;
   // 表单验证
   await formEl.validate((valid, fields) => {
     if (valid) {
       // 登录
+      loading.value = true;
       post("/api/login", { username, password }).then((res) => {
-        console.log(res);
         if (res.code === 0) {
           ElMessage({
             type: "success",
             message: res.msg,
+            onClose:() => {
+              loading.value = false;
+              // 跳转
+              router.push("/");
+            }
           });
         } else {
           ElMessage.error(res.msg);
+          loading.value = false;
         }
       });
     } else {
