@@ -6,7 +6,7 @@
   </el-icon>
 
   <!-- 通知实体 -->
-  <el-drawer v-model="drawer" class="drawer-message" :with-header="false">
+  <el-drawer v-model="drawer" :with-header="false">
     <!-- 标题 -->
     <div class="drawer-title">{{ title }}</div>
     <!-- 操作按钮 -->
@@ -15,14 +15,14 @@
       <el-button type="danger" @click="handleDeleteAll">全部删除</el-button>
     </el-button-group>
     <!-- 消息内容 -->
-    <el-scrollbar style="margin: 10px 0;">
+    <el-scrollbar style="margin: 10px 0">
       <el-empty
         v-if="notificationData.length === 0"
         description="还没有消息呢"
       />
       <el-card
         class="box-card"
-        shadow="never"
+        shadow="hover"
         v-for="notification in notificationData"
         :key="notification.id"
       >
@@ -61,6 +61,12 @@
         </template>
         <div style="line-height: 1.5em">{{ notification.content }}</div>
       </el-card>
+      <el-button v-if="notificationData.length !== 0"
+        type="primary"
+        @click="loadMessage"
+        style="width: 100%; margin-top: 10px; margin-bottom: 10px"
+        >加载更多</el-button
+      >
     </el-scrollbar>
   </el-drawer>
 </template>
@@ -79,14 +85,13 @@ const notificationData = ref([
   },
 ]);
 
+// 模拟后台加载数据
 function loadMessage() {
-
-  let length = notificationData.value.length++;
-
+  let length = notificationData.value.length;
   notificationData.value.push({
-    id: `${length}`,
+    id: `${length + 1}`,
     time: "2022-10-23",
-    title: `标题${length}`,
+    title: `标题${length + 1}`,
     content: "vue3-admin 项目启动",
     type: "info",
     read: false,
@@ -161,7 +166,7 @@ function handleDeleteAll() {
   padding-bottom: 16px;
   font-size: 16px;
 }
-::v-deep .el-card__header {
+:deep(.el-card__header) {
   padding: 4px 10px;
 }
 .el-scrollbar {
