@@ -1,5 +1,5 @@
 <template>
-  仪表板
+  <div>仪表板</div>
 </template>
 
 <script>
