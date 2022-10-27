@@ -1,4 +1,4 @@
-import Layout from '@/views/layout/Layout'
+import Layout from '../views/layout/Layout.vue'
 
 const generateRoutes = [
   {

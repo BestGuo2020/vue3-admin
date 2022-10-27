@@ -1,8 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import generateRoutes from "./routeGenerate";
 
-import Layout from '@/views/layout/Layout'
-
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
