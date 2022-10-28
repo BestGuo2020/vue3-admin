@@ -3,14 +3,14 @@
     <!-- 开启路由模式，使每个菜单中的 index 属性变成 url -->
     <el-menu router :collapse="fold">
       <!-- 循环遍历其路由数据 -->
-      <template v-for="item in generateRoutes" :key="item.name">
+      <template v-for="item in generateRoutes" :key="item.meta.title">
         <!-- 遍历子菜单项只有一个，子菜单只有一个的话，那么就直接取出子菜单项，不需要展开 -->
         <el-menu-item
           v-if="item.children && item.children.length === 1"
           :index="'/' + item.children[0].path"
         >
-          <el-icon :class="item.icon"></el-icon>
-          <span>{{ item.children[0].name }}</span>
+          <el-icon :class="item.meta.icon"></el-icon>
+          <span>{{ item.children[0].meta.title }}</span>
         </el-menu-item>
         <!-- 子菜单有多个时，遍历子菜单，同时要附带下拉图标，没有子菜单项的就不展示 -->
         <el-sub-menu
@@ -18,14 +18,15 @@
           :index="item.path"
         >
           <template #title>
-            <el-icon :class="item.icon"></el-icon><span>{{ item.name }}</span>
+            <el-icon :class="item.meta.icon"></el-icon
+            ><span>{{ item.meta.title }}</span>
           </template>
           <el-menu-item
             v-for="subitem in item.children"
-            :key="subitem.name"
+            :key="subitem.meta.title"
             :index="item.path + '/' + subitem.path"
           >
-            {{ subitem.name }}
+            {{ subitem.meta.title }}
           </el-menu-item>
         </el-sub-menu>
       </template>

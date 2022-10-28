@@ -5,19 +5,19 @@ import { useRoute } from 'vue-router'
 export function tabsOperation() {
   // 定义已经打开的菜单
   let openedMenu = ref([
-    { path: '/dashboard', name: '仪表板', effect: 'dark', closeable: false },
+    { path: '/dashboard', title: '仪表板', effect: 'dark', closeable: false },
   ])
 
   // 定义路由实例
   const route = useRoute()
   onMounted(() => {
-    // console.log(route.path, route.name);
+    // console.log(route.path, route.title);
     // dom 挂载成功之后，判断当前的路由是否为 dashboard，不是则加载当前的路由数据到 tabs 中，并修改样式
     if (openedMenu.value[0].path !== route.path) {
       openedMenu.value[0].effect = 'plain'
       openedMenu.value.push({
         path: route.path,
-        name: route.name,
+        title: route.title,
         effect: 'dark',
         closeable: true,
       })
@@ -40,7 +40,7 @@ export function tabsOperation() {
     if (!exist) {
       // 添加
       openedMenu.value.push({
-        name: to.name,
+        title: to.meta.title,
         path: to.path,
         effect: 'dark',
         closeable: true,

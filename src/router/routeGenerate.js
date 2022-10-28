@@ -4,12 +4,16 @@ const generateRoutes = [
   {
     component: Layout,
     path: '/',
-    name: '仪表板',
-    icon: 'fa-solid fa-gauge',
+    meta: {
+      title: '仪表板',
+      icon: 'fa-solid fa-gauge',
+    },
     children: [
       {
         path: 'dashboard',
-        name: '仪表板',
+        meta: {
+          title: '仪表板',
+        },
         component: () => import('@/views/dashboard/Index'),
       },
     ],
@@ -17,22 +21,30 @@ const generateRoutes = [
   {
     component: Layout,
     path: '/system',
-    name: '系统设置',
-    icon: 'fa-solid fa-gears',
+    meta: {
+      title: '系统设置',
+      icon: 'fa-solid fa-gears',
+    },
     children: [
       {
         path: 'user',
-        name: '用户管理',
+        meta: {
+          title: '用户管理',
+        },
         component: () => import('@/views/user/Index'),
       },
       {
         path: 'role',
-        name: '角色管理',
+        meta: {
+          title: '角色管理',
+        },
         component: () => import('@/views/role/Index'),
       },
       {
         path: 'power',
-        name: '权限管理',
+        meta: {
+          title: '权限管理',
+        },
         component: () => import('@/views/menu/Index'),
       },
     ],

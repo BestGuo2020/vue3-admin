@@ -9,7 +9,7 @@
       :closable="item.closeable"
       @close="tabClose(item)"
       @click="tabClick(item)"
-      >{{ item.name }}</el-tag
+      >{{ item.title }}</el-tag
     >
   </el-row>
   <el-scrollbar>

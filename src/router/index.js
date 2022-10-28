@@ -34,6 +34,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  // 设置浏览器 title
+  document.title = to.meta.title
   NProgress.start()
   next()
 })
