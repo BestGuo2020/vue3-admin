@@ -24,6 +24,7 @@ export default ({ mode }) => {
       vueJsx(),
       AutoImport({
         imports: ['vue', 'vue-router'],
+        resolvers: [ElementPlusResolver()],
         dts: false,
       }),
       Components({
@@ -31,10 +32,10 @@ export default ({ mode }) => {
         dts: false,
       }),
       viteMockServe({
-        mockPath: './src/mock/',
+        mockPath: './src/mock/', // 配置mock请求服务器
       }),
       eslintPlugin({
-        include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue'],
+        include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue'], // 配置项目运行时，eslint 检查
       }),
     ],
     resolve: {
