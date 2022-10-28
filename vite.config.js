@@ -17,6 +17,7 @@ export default ({ mode }) => {
   return defineConfig({
     server: {
       port: env.VITE_PORT,
+      open: true,
     },
     plugins: [
       vue(),
