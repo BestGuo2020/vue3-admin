@@ -8,6 +8,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 import path from 'path'
 import { viteMockServe } from 'vite-plugin-mock'
+import eslintPlugin from 'vite-plugin-eslint'
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
@@ -30,6 +31,9 @@ export default ({ mode }) => {
       }),
       viteMockServe({
         mockPath: './src/mock/',
+      }),
+      eslintPlugin({
+        include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue'],
       }),
     ],
     resolve: {

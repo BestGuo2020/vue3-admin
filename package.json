@@ -5,7 +5,7 @@
     "dev": "vite --mode dev",
     "build": "vite build",
     "preview": "vite preview",
-    "lint":"npx eslint src/**/*.{js,jsx,vue} --fix"
+    "lint": "npx eslint src/**/*.{js,jsx,vue} --fix"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
@@ -34,6 +34,7 @@
     "unplugin-auto-import": "^0.11.2",
     "unplugin-vue-components": "^0.22.8",
     "vite": "^3.1.8",
+    "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-mock": "^2.9.6"
   }
 }
