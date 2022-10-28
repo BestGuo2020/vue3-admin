@@ -2,22 +2,27 @@
   <!-- 选项卡 -->
   <el-row class="tab-list">
     <el-tag
-      class="mx-1 tab-item"
       v-for="item in openedMenu"
       :key="item.path"
-      @close="tabClose(item)"
-      @click="tabClick(item)"
+      class="mx-1 tab-item"
       :effect="item.effect"
       :closable="item.closeable"
-      >{{ item.name }}</el-tag>
+      @close="tabClose(item)"
+      @click="tabClick(item)"
+      >{{ item.name }}</el-tag
+    >
   </el-row>
   <el-scrollbar>
     <!-- 被路由控制的组件，必须要有一个根元素，切换动画才会生效 -->
-    <div style="position: relative; height: 100%; width: 100%;">
-      <router-view v-slot="{ Component }" style="position: absolute; height: 100%; width: 100%;">
-        <transition 
+    <div style="position: relative; height: 100%; width: 100%">
+      <router-view
+        v-slot="{ Component }"
+        style="position: absolute; height: 100%; width: 100%"
+      >
+        <transition
           enter-active-class="animate__animated animate__fadeIn animate__faster animate__delay-1s"
-          leave-active-class="animate__animated animate__fadeOut animate__faster">
+          leave-active-class="animate__animated animate__fadeOut animate__faster"
+        >
           <component :is="Component"></component>
         </transition>
       </router-view>
@@ -26,9 +31,9 @@
 </template>
 
 <script setup>
-import { tabsOperation } from "../hooks/useTabs";
+import { tabsOperation } from '../hooks/useTabs'
 
-const { openedMenu, tabClose, tabClick } = tabsOperation();
+const { openedMenu, tabClose, tabClick } = tabsOperation()
 </script>
 
 <style>

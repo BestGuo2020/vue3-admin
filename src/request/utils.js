@@ -7,7 +7,7 @@ import request from './index'
  * @returns Promise
  */
 export function post(url, data) {
-  return request.post(url, data);
+  return request.post(url, data)
 }
 
 /**
@@ -17,5 +17,5 @@ export function post(url, data) {
  * @returns Promise
  */
 export function get(url, data) {
-  return request.get(url, data);
+  return request.get(url, data)
 }

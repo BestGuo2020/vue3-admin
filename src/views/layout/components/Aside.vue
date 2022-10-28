@@ -1,51 +1,50 @@
 <template>
-    <el-scrollbar>
-      <!-- 开启路由模式，使每个菜单中的 index 属性变成 url -->
-      <el-menu router :collapse="fold">
-        <!-- 循环遍历其路由数据 -->
-        <template v-for="item in generateRoutes" :key="item.name">
-          <!-- 遍历子菜单项只有一个，子菜单只有一个的话，那么就直接取出子菜单项，不需要展开 -->
+  <el-scrollbar>
+    <!-- 开启路由模式，使每个菜单中的 index 属性变成 url -->
+    <el-menu router :collapse="fold">
+      <!-- 循环遍历其路由数据 -->
+      <template v-for="item in generateRoutes" :key="item.name">
+        <!-- 遍历子菜单项只有一个，子菜单只有一个的话，那么就直接取出子菜单项，不需要展开 -->
+        <el-menu-item
+          v-if="item.children && item.children.length === 1"
+          :index="'/' + item.children[0].path"
+        >
+          <el-icon :class="item.icon"></el-icon>
+          <span>{{ item.children[0].name }}</span>
+        </el-menu-item>
+        <!-- 子菜单有多个时，遍历子菜单，同时要附带下拉图标，没有子菜单项的就不展示 -->
+        <el-sub-menu
+          v-else-if="item.children && item.children.length > 1"
+          :index="item.path"
+        >
+          <template #title>
+            <el-icon :class="item.icon"></el-icon><span>{{ item.name }}</span>
+          </template>
           <el-menu-item
-            v-if="item.children && item.children.length === 1"
-            :index="'/' + item.children[0].path"
+            v-for="subitem in item.children"
+            :key="subitem.name"
+            :index="item.path + '/' + subitem.path"
           >
-            <el-icon :class="item.icon"></el-icon>
-            <span>{{ item.children[0].name }}</span>
+            {{ subitem.name }}
           </el-menu-item>
-          <!-- 子菜单有多个时，遍历子菜单，同时要附带下拉图标，没有子菜单项的就不展示 -->
-          <el-sub-menu
-            v-else-if="item.children && item.children.length > 1"
-            :index="item.path"
-          >
-            <template #title>
-              <el-icon :class="item.icon"></el-icon><span>{{ item.name }}</span>
-            </template>
-            <el-menu-item
-              v-for="subitem in item.children"
-              :key="subitem.name"
-              :index="item.path + '/' + subitem.path"
-            >
-              {{ subitem.name }}
-            </el-menu-item>
-          </el-sub-menu>
-        </template>
-      </el-menu>
-    </el-scrollbar>
+        </el-sub-menu>
+      </template>
+    </el-menu>
+  </el-scrollbar>
 </template>
 
 <script setup>
-import generateRoutes from "@/router/routeGenerate";
-import { watch } from "@vue/runtime-core";
+import generateRoutes from '@/router/routeGenerate'
+import { watch } from 'vue'
 
-import emitter from '@/utils/bus';
+import emitter from '@/utils/bus'
 
-let fold = ref(false);
+let fold = ref(false)
 
 emitter.on('collapse', (val) => {
-  fold.value = val;
-  console.log(val);
-});
-
+  fold.value = val
+  console.log(val)
+})
 </script>
 
 <style lang="scss">
@@ -57,8 +56,8 @@ emitter.on('collapse', (val) => {
   border-right: none;
 }
 .el-menu--inline {
-    background: transparent;
-  }
+  background: transparent;
+}
 /* 处理菜单折叠时字体和图标不消失的问题，以及菜单默认宽 */
 .el-menu--vertical:not(.el-menu--collapse) {
   width: 200px;
@@ -80,19 +79,21 @@ emitter.on('collapse', (val) => {
 .el-menu-item.is-active {
   color: #fff !important;
   opacity: 1;
-  background: hsla(0,0%,100%,.23);
+  background: hsla(0, 0%, 100%, 0.23);
 }
-.el-menu-item, .el-sub-menu__title {
+.el-menu-item,
+.el-sub-menu__title {
   color: #fff;
   height: 60px;
 }
-.el-menu-item:hover, .el-sub-menu__title:hover {
+.el-menu-item:hover,
+.el-sub-menu__title:hover {
   color: #fff;
   opacity: 1;
-  background: hsla(0,0%,100%,.23);
+  background: hsla(0, 0%, 100%, 0.23);
 }
 .is-opened {
   opacity: 1;
-  background: hsla(0,0%,100%,.05);
+  background: hsla(0, 0%, 100%, 0.05);
 }
 </style>

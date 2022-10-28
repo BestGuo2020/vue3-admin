@@ -4,11 +4,11 @@
  * @param {String} content 内容
  */
 export function warningConfirm(content) {
-  return ElMessageBox.confirm(content, "警告", {
-    confirmButtonText: "确认",
-    cancelButtonText: "取消",
-    type: "warning",
-  });
+  return ElMessageBox.confirm(content, '警告', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning',
+  })
 }
 
 /**
@@ -20,13 +20,13 @@ export function warningConfirm(content) {
  */
 export function alert(content, call) {
   if (call) {
-    ElMessageBox.alert(content, "提示", {
-      confirmButtonText: "确定",
+    ElMessageBox.alert(content, '提示', {
+      confirmButtonText: '确定',
       callback: (action) => call(action),
-    });
+    })
   } else {
-    ElMessageBox.alert(content, "提示", {
-      confirmButtonText: "确定",
-    });
+    ElMessageBox.alert(content, '提示', {
+      confirmButtonText: '确定',
+    })
   }
 }

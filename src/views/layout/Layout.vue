@@ -2,26 +2,25 @@
   <el-container class="layout-container">
     <!-- 侧边栏 -->
     <el-aside width="auto">
-      <AsideContent/>
+      <AsideContent />
     </el-aside>
     <el-container>
       <!-- 头部 -->
       <el-header style="display: flex; justify-content: space-between">
-        <HeaderContent/>
+        <HeaderContent />
       </el-header>
       <!-- 内容部分 -->
       <el-main class="main">
-        <MainContent/>
+        <MainContent />
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script setup>
-import AsideContent from "./components/Aside.vue"
-import HeaderContent from "./components/Header.vue"
+import AsideContent from './components/Aside.vue'
+import HeaderContent from './components/Header.vue'
 import MainContent from './components/Content.vue'
-
 </script>
 
 <style type="scss" scoped>

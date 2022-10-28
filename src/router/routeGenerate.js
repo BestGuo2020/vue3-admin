@@ -10,9 +10,9 @@ const generateRoutes = [
       {
         path: 'dashboard',
         name: '仪表板',
-        component: () => import("@/views/dashboard/Index"),
-      }
-    ]
+        component: () => import('@/views/dashboard/Index'),
+      },
+    ],
   },
   {
     component: Layout,
@@ -23,20 +23,20 @@ const generateRoutes = [
       {
         path: 'user',
         name: '用户管理',
-        component: () => import("@/views/user/Index"),
+        component: () => import('@/views/user/Index'),
       },
       {
         path: 'role',
         name: '角色管理',
-        component: () => import("@/views/role/Index"),
+        component: () => import('@/views/role/Index'),
       },
       {
         path: 'power',
         name: '权限管理',
-        component: () => import("@/views/menu/Index"),
-      }
-    ]
+        component: () => import('@/views/menu/Index'),
+      },
+    ],
   },
 ]
 
-export default generateRoutes;
+export default generateRoutes

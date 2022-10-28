@@ -4,11 +4,11 @@
     <div class="login-form">
       <h3>系统后台登录</h3>
       <!-- 登录表单 -->
-      <el-form :model="loginForm" ref="ruleFormRef" :rules="formRules">
+      <el-form ref="ruleFormRef" :model="loginForm" :rules="formRules">
         <el-form-item prop="username">
           <el-input
-            type="text"
             v-model="loginForm.username"
+            type="text"
             placeholder="用户名"
           >
             <template #prefix>
@@ -18,8 +18,8 @@
         </el-form-item>
         <el-form-item prop="password">
           <el-input
-            type="password"
             v-model="loginForm.password"
+            type="password"
             placeholder="密码"
           >
             <template #prefix>
@@ -32,7 +32,8 @@
             type="primary"
             :loading="loading"
             class="login-btn"
-            @click="login(ruleFormRef)">登录
+            @click="login(ruleFormRef)"
+            >登录
           </el-button>
         </div>
       </el-form>
@@ -41,64 +42,64 @@
 </template>
 
 <script setup>
-import bg from "./components/Background.vue";
-import { post } from "@/request/utils";
-import { useRouter } from "vue-router";
+import bg from './components/Background.vue'
+import { post } from '@/request/utils'
+import { useRouter } from 'vue-router'
 
 // 路由引入
-const router = useRouter();
+const router = useRouter()
 
 // 登录表单中的数据
 const loginForm = reactive({
-  username: "admin",
-  password: "111111",
-});
+  username: 'admin',
+  password: '111111',
+})
 
 // 登录按钮状态
-const loading = ref(false);
+const loading = ref(false)
 
-const ruleFormRef = ref(); // 定义一个 ref 用于直接获取表单的信息
+const ruleFormRef = ref() // 定义一个 ref 用于直接获取表单的信息
 
 // 定义校验的规则
 const formRules = {
-  username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   password: [
-    { required: true, message: "请输入密码", trigger: "blur" },
-    { min: 6, max: 18, message: "密码长度必须在6-18之间", trigger: "blur" },
+    { required: true, message: '请输入密码', trigger: 'blur' },
+    { min: 6, max: 18, message: '密码长度必须在6-18之间', trigger: 'blur' },
   ],
-};
+}
 
 // 登录操作
 async function login(formEl) {
   if (!formEl) {
-    return;
+    return
   }
-  const { username, password } = loginForm;
+  const { username, password } = loginForm
   // 表单验证
   await formEl.validate((valid, fields) => {
     if (valid) {
       // 登录
-      loading.value = true;
-      post("/api/login", { username, password }).then((res) => {
+      loading.value = true
+      post('/api/login', { username, password }).then((res) => {
         if (res.code === 0) {
           ElMessage({
-            type: "success",
+            type: 'success',
             message: res.msg,
-            onClose:() => {
-              loading.value = false;
+            onClose: () => {
+              loading.value = false
               // 跳转
-              router.push("/");
-            }
-          });
+              router.push('/')
+            },
+          })
         } else {
-          ElMessage.error(res.msg);
-          loading.value = false;
+          ElMessage.error(res.msg)
+          loading.value = false
         }
-      });
+      })
     } else {
-      console.log("error submit!", fields);
+      console.log('error submit!', fields)
     }
-  });
+  })
 }
 </script>
 

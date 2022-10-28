@@ -2,11 +2,11 @@
   <div @click="handleCollapse">
     <el-icon :size="18" class="icon-style icon-collapse">
       <i
+        v-if="collapse"
         class="fa fa-angle-double-right"
         aria-hidden="true"
-        v-if="collapse"
       ></i>
-      <i class="fa fa-angle-double-left" aria-hidden="true" v-else></i>
+      <i v-else class="fa fa-angle-double-left" aria-hidden="true"></i>
     </el-icon>
   </div>
   <div style="flex-shrink: 1"></div>
@@ -16,8 +16,8 @@
       class="icon-style icon-fullsceen"
       @click="toggleFullscreen"
     >
-      <i class="fa fa-expand" aria-hidden="true" v-if="!fullScreen"></i>
-      <i class="fa fa-compress" aria-hidden="true" v-else></i>
+      <i v-if="!fullScreen" class="fa fa-expand" aria-hidden="true"></i>
+      <i v-else class="fa fa-compress" aria-hidden="true"></i>
     </el-icon>
     <Notification></Notification>
     <el-dropdown>
@@ -37,31 +37,31 @@
 </template>
 
 <script setup>
-import emitter from "@/utils/bus";
-import screenfull from "screenfull";
+import emitter from '@/utils/bus'
+import screenfull from 'screenfull'
 
-import Notification from './Notification.vue';
+import Notification from './Notification.vue'
 
 // 定义并关闭左侧菜单折叠
-const collapse = ref(true);
+const collapse = ref(true)
 function handleCollapse() {
-  collapse.value = !collapse.value;
-  emitter.emit("collapse", collapse.value);
+  collapse.value = !collapse.value
+  emitter.emit('collapse', collapse.value)
 }
 
 // 默认头像
-const avatar = "https://avatars.githubusercontent.com/u/45250038?v=4";
+const avatar = 'https://avatars.githubusercontent.com/u/45250038?v=4'
 
 // 全屏
-let fullScreen = ref(false);
+let fullScreen = ref(false)
 function toggleFullscreen() {
   if (screenfull.isEnabled) {
     if (!screenfull.isFullscreen) {
-      screenfull.toggle();
+      screenfull.toggle()
     } else {
-      screenfull.exit();
+      screenfull.exit()
     }
-    fullScreen.value = !fullScreen.value;
+    fullScreen.value = !fullScreen.value
   }
 }
 </script>

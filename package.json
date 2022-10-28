@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite --mode dev",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint":"npx eslint src/**/*.{js,jsx,vue} --fix"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
@@ -23,7 +24,12 @@
     "@types/node": "^18.11.7",
     "@vitejs/plugin-vue": "^3.1.2",
     "@vitejs/plugin-vue-jsx": "^2.0.1",
+    "eslint": "^8.26.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.6.0",
     "mockjs": "^1.1.0",
+    "prettier": "2.7.1",
     "sass": "^1.55.0",
     "unplugin-auto-import": "^0.11.2",
     "unplugin-vue-components": "^0.22.8",

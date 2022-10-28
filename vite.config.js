@@ -1,19 +1,17 @@
-import { fileURLToPath, URL } from "node:url";
+import { defineConfig, loadEnv } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
-import { defineConfig, loadEnv } from "vite";
-import vue from "@vitejs/plugin-vue";
-import vueJsx from "@vitejs/plugin-vue-jsx";
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
-import AutoImport from "unplugin-auto-import/vite";
-import Components from "unplugin-vue-components/vite";
-import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
-
-import path from "path";
-import { viteMockServe } from "vite-plugin-mock";
+import path from 'path'
+import { viteMockServe } from 'vite-plugin-mock'
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
-  const env = loadEnv(mode, process.cwd());
+  const env = loadEnv(mode, process.cwd())
 
   return defineConfig({
     server: {
@@ -23,24 +21,25 @@ export default ({ mode }) => {
       vue(),
       vueJsx(),
       AutoImport({
-        imports: ["vue", "vue-router"],
-        resolvers: [ElementPlusResolver()],
+        imports: ['vue', 'vue-router'],
+        dts: false,
       }),
       Components({
         resolvers: [ElementPlusResolver()],
+        dts: false,
       }),
       viteMockServe({
-        mockPath: "./src/mock/",
+        mockPath: './src/mock/',
       }),
     ],
     resolve: {
       alias: {
         // 设置路径 这里resolve和join可自行选用
-        "~": path.resolve(__dirname, "./"),
+        '~': path.resolve(__dirname, './'),
         // 设置别名
-        "@": path.resolve(__dirname, "./src"),
+        '@': path.resolve(__dirname, './src'),
       },
-      extensions: [".mjs", ".js", ".jsx", ".json", ".vue"],
+      extensions: ['.mjs', '.js', '.jsx', '.json', '.vue'],
     },
-  });
-};
+  })
+}
