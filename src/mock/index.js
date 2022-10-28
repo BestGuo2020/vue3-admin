@@ -1,3 +1,28 @@
 import login from './login'
 
-export default [...login]
+export default [
+  ...login,
+  // 模拟获取用户信息
+  {
+    url: '/api/userinfo',
+    method: 'post',
+    response: (req) => {
+      if (req.token) {
+        return {
+          code: 0,
+          msg: '',
+          data: {
+            username,
+            roles: ['admin'],
+            header: 'https://avatars.githubusercontent.com/u/45250038?v=4',
+            token: 'bestguo2020',
+          },
+        }
+      }
+      return {
+        code: -1,
+        msg: '认证失效了，请重新登录',
+      }
+    },
+  },
+]
