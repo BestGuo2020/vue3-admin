@@ -5,6 +5,14 @@ const instance = axios.create({
   timeout: 1000,
 })
 
+// 请求前的拦截处理
+instance.interceptors.request.use((config) => {
+  console.log(config)
+  // 协带 token
+  config.headers.token = localStorage.getItem('token')
+  return config
+})
+
 // 响应拦截器处理
 instance.interceptors.response.use(
   (config) => {
