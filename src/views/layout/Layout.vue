@@ -9,6 +9,8 @@
       <el-header style="display: flex; justify-content: space-between">
         <HeaderContent />
       </el-header>
+      <!-- 选项卡 -->
+      <Tab />
       <!-- 内容部分 -->
       <el-main class="main">
         <MainContent />
@@ -21,6 +23,7 @@
 import AsideContent from './components/Aside.vue'
 import HeaderContent from './components/Header.vue'
 import MainContent from './components/Content.vue'
+import Tab from './components/Tab.vue'
 </script>
 
 <style type="scss" scoped>
@@ -31,5 +34,8 @@ import MainContent from './components/Content.vue'
 /* 右侧内容样式 */
 .el-container {
   display: flex;
+}
+.el-scrollbar :deep(.el-scrollbar__view) {
+  height: inherit;
 }
 </style>
