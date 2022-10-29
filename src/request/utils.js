@@ -17,5 +17,5 @@ export function post(url, data) {
  * @returns Promise
  */
 export function get(url, data) {
-  return request.get(url, data)
+  return request.get(url, { params: data })
 }
