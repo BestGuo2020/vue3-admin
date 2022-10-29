@@ -12,7 +12,7 @@
 </template>
 
 <script setup></script>
-<style lang="scss">
+<style lang="scss" scoped>
 * {
   margin: 0px;
   padding: 0px;

@@ -1,6 +1,6 @@
 import { post } from '@/request/utils'
 import { useRouter } from 'vue-router'
-import { useMainStore } from '@/store'
+import { useMainStore } from '@/store/index'
 
 export default function () {
   // 路由引入
@@ -45,9 +45,9 @@ export default function () {
               message: res.msg,
               onClose: () => {
                 loading.value = false
-                // 保存用户信息并获取 token，
+                // 保存用户信息并将token存到本地和state
                 mainStore.userInfo = res.data
-                mainStore.token = res.data.token
+                localStorage.setItem('token', res.data.token)
                 // 跳转
                 router.push('/')
               },

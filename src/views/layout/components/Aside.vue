@@ -35,8 +35,8 @@
 </template>
 
 <script setup>
-import generateRoutes from '@/router/routeGenerate'
-import { watch } from 'vue'
+import router from '@/router'
+import { onMounted, watch } from 'vue'
 
 import emitter from '@/utils/bus'
 
@@ -46,6 +46,8 @@ emitter.on('collapse', (val) => {
   fold.value = val
   console.log(val)
 })
+
+let generateRoutes = router.getRoutes()
 </script>
 
 <style lang="scss">
