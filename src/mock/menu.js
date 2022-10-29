@@ -34,18 +34,21 @@ const menus = [
     children: [
       {
         sign: 'user',
+        icon: 'fa-regular fa-user',
         title: '用户管理',
         path: 'user',
         fullpath: '/system/user',
       },
       {
         sign: 'role',
+        icon: 'fa-regular fa-circle',
         path: 'role',
         title: '角色管理',
         fullpath: '/system/role',
       },
       {
         sign: 'power',
+        icon: 'fa-regular fa-circle',
         path: 'power',
         title: '权限管理',
         fullpath: '/system/power',

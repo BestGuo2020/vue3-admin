@@ -26,7 +26,8 @@
             :key="subitem.meta.title"
             :index="item.path + '/' + subitem.path"
           >
-            {{ subitem.meta.title }}
+            <el-icon :class="subitem.meta.icon"></el-icon
+            ><span>{{ subitem.meta.title }}</span>
           </el-menu-item>
         </el-sub-menu>
       </template>
