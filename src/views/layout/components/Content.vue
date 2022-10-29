@@ -1,9 +1,9 @@
 <template>
-  <el-scrollbar>
-    <!-- 被路由控制的组件，必须要有一个根元素，切换动画才会生效 -->
-    <div class="main-content">
+  <!-- 被路由控制的组件，必须要有一个根元素，切换动画才会生效 -->
+  <div class="main-content">
+    <el-scrollbar>
       <el-config-provider :locale="zhCn">
-        <router-view v-slot="{ Component }" style="height: 100%; width: 100%">
+        <router-view v-slot="{ Component }">
           <transition
             enter-active-class="animate__animated animate__fadeIn animate__faster animate__delay-1s"
             leave-active-class="animate__animated animate__fadeOut animate__faster"
@@ -12,8 +12,8 @@
           </transition>
         </router-view>
       </el-config-provider>
-    </div>
-  </el-scrollbar>
+    </el-scrollbar>
+  </div>
 </template>
 
 <script setup>

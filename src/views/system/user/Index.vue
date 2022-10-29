@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-row :gutter="20">
+  <div style="padding: 15px">
+    <el-row>
       <el-col :span="24">
         <el-table
           ref="userRef"
@@ -33,8 +33,6 @@
           </el-table-column>
         </el-table>
       </el-col>
-    </el-row>
-    <el-row :gutter="20">
       <el-col :span="24">
         <el-pagination
           v-model:current-page="pageInfo.page"
@@ -73,4 +71,9 @@ function handleChange() {
 watch(pageInfo, () => handleChange(), { immediate: true })
 </script>
 
-<style scoped></style>
+<style scoped>
+.el-col {
+  padding: 10px;
+  background: white;
+}
+</style>
