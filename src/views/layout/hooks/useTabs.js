@@ -17,7 +17,7 @@ export function tabsOperation() {
       openedMenu.value[0].effect = 'plain'
       openedMenu.value.push({
         path: route.path,
-        title: route.title,
+        title: route.meta.title,
         effect: 'dark',
         closeable: true,
       })

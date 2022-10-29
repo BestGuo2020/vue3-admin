@@ -19,6 +19,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const mainState = useMainStore()
+
   NProgress.start()
   // 设置浏览器 title
   document.title = to.meta.title
@@ -26,12 +28,11 @@ router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
   // token 有没有
   if (token) {
-    debugger
     // 路由信息是否加载完成
-    if (useMainStore.routeLoaded) {
+    if (mainState.routeLoaded) {
       // 但是还在登录页，直接跳回主页
       if (to.path === '/login') {
-        next({ path: '/' })
+        next({ path: '/', replace: true })
       } else {
         next()
       }
@@ -42,7 +43,7 @@ router.beforeEach((to, from, next) => {
         res.forEach((item) => {
           router.addRoute(item)
         })
-        useMainStore.routeLoaded = true
+        mainState.routeLoaded = true
         next({ ...to, replace: true })
       })
     }
