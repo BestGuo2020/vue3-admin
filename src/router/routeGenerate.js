@@ -55,60 +55,6 @@ export async function generateRoutes() {
     const data = handle(menu)
     return Promise.resolve(data)
   }
-  // const data = [
-  //   {
-  //     component: Layout,
-  //     path: '/',
-  //     meta: {
-  //       title: '仪表板',
-  //       icon: 'fa-solid fa-gauge',
-  //     },
-  //     children: [
-  //       {
-  //         path: 'dashboard',
-  //         meta: {
-  //           title: '仪表板',
-  //         },
-  //         component: () => import('@/views/dashboard/Index'),
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     component: Layout,
-  //     path: '/system',
-  //     meta: {
-  //       title: '系统设置',
-  //       icon: 'fa-solid fa-gears',
-  //     },
-  //     children: [
-  //       {
-  //         path: 'user',
-  //         meta: {
-  //           title: '用户管理',
-  //         },
-  //         component: () => import('@/views/system/user/Index'),
-  //       },
-  //       {
-  //         path: 'role',
-  //         meta: {
-  //           title: '角色管理',
-  //         },
-  //         component: () => import('@/views/system/role/Index'),
-  //       },
-  //       {
-  //         path: 'power',
-  //         meta: {
-  //           title: '权限管理',
-  //         },
-  //         component: () => import('@/views/system/menu/Index'),
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     path: '/:pathMatch(.*)*',
-  //     redirect: '/404',
-  //   },
-  // ]
 
-  return Promise.resolve(data)
+  return Promise.reject(new Error(res.msg))
 }
