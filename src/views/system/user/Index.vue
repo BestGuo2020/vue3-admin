@@ -190,7 +190,7 @@ function openHandle(status, row) {
 function closeHandle() {
   modalStatus.dialogFormVisible = false
   Object.keys(formData).map((key) => {
-    delete formData[key]
+    formData[key] = ''
   })
 }
 
