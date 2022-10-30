@@ -65,9 +65,12 @@
               {{ scope.row.createTime }}
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="140" cen>
-            <template #default>
-              <el-button type="primary" size="small" @click="openHandle('edit')"
+          <el-table-column fixed="right" label="操作" width="140">
+            <template #default="scope">
+              <el-button
+                type="primary"
+                size="small"
+                @click="openHandle('edit', scope.row)"
                 >编辑</el-button
               >
               <el-button type="primary" size="small" @click="remove"
@@ -177,7 +180,12 @@ let formData = reactive({
   enabled: true,
 })
 
-function openHandle(status) {
+function openHandle(status, row) {
+  if (status === 'edit') {
+    Object.keys(formData).map((key) => {
+      formData[key] = row[key]
+    })
+  }
   modalStatus.status = status
   modalStatus.dialogFormVisible = true
 }
