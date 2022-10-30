@@ -6,6 +6,7 @@ import Particles from 'particles.vue3'
 import { createPinia } from 'pinia'
 
 import 'animate.css'
+import './assets/custom/custom.css'
 
 const pinia = createPinia()
 const app = createApp(App)

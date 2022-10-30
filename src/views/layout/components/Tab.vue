@@ -22,6 +22,7 @@ const { openedMenu, tabClose, tabClick } = tabsOperation()
 .tab-list {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   height: 34px;
+  margin-bottom: 0;
 }
 .tab-item {
   margin: 5px 0 5px 8px;

@@ -7,6 +7,8 @@ for (let i = 0; i < 20; i++) {
     password: '*',
     gender: 1,
     enabled: true,
+    address: `x省y市z小区第${i + 100}号`,
+    phone: 13766660004 + i,
     createTime: '2022-10-29 11:00:00',
   })
 }

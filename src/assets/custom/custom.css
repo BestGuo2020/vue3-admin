@@ -1,0 +1,13 @@
+.page-container {
+  padding: 15px
+}
+.el-col {
+  padding: 10px;
+  background: white;
+}
+.el-row {
+  margin-bottom: 12px;
+}
+.el-form--inline .el-form-item {
+  margin-bottom: 0;
+}
