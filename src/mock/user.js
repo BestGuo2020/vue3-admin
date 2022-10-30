@@ -1,8 +1,10 @@
-const users = []
+import moment from 'moment/moment'
 
-for (let i = 0; i < 20; i++) {
+let users = []
+
+for (let i = 0; i < 5; i++) {
   users.push({
-    id: 1000 + i,
+    id: '1000' + i,
     username: 'zhangsan' + i,
     password: '*',
     gender: 1,
@@ -31,6 +33,52 @@ export default [
       return {
         count: users.length,
         data: users.slice(page, pageSize),
+      }
+    },
+  },
+  {
+    url: '/api/user/add',
+    method: 'post',
+    response: (req) => {
+      let data = req.body
+      data.id = new Date().getTime()
+      data.createTime = moment(data.id).format('YYYY-MM-DD HH:mm:ss')
+      users.push(data)
+
+      return {
+        code: 0,
+        msg: '添加成功！',
+      }
+    },
+  },
+  {
+    url: '/api/user/edit',
+    method: 'post',
+    response: (req) => {
+      let data = req.body
+
+      console.log(data)
+      users = users.map((item) => {
+        if (item.id === data.id) {
+          return data
+        }
+        return item
+      })
+
+      return {
+        code: 0,
+        msg: '修改成功！',
+      }
+    },
+  },
+  {
+    url: '/api/user/remove',
+    method: 'get',
+    response: (req) => {
+      users = users.filter((item) => req.query.id !== item.id)
+      return {
+        code: 0,
+        msg: '删除成功！',
       }
     },
   },

@@ -17,7 +17,7 @@
             <el-checkbox v-model="listQuery.enabled" label="启用" />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="handleChange">查询</el-button>
+            <el-button type="primary" @click="getData">查询</el-button>
             <el-button type="primary" @click="openHandle('add')"
               >添加</el-button
             >
@@ -32,13 +32,15 @@
       <el-col :span="24">
         <el-table ref="userRef" :data="list" style="width: 100%" :border="true">
           <el-table-column type="selection" label="全选" width="55" />
-          <el-table-column label="id" width="100">
+          <el-table-column label="id" width="140">
             <template #default="scope">{{ scope.row.id }}</template>
           </el-table-column>
           <el-table-column label="用户名" width="120">
             <template #default="scope">{{ scope.row.username }}</template>
           </el-table-column>
-          <el-table-column label="密码" width="70"> * </el-table-column>
+          <el-table-column label="密码" width="140">
+            <template #default="scope">{{ scope.row.password }}</template>
+          </el-table-column>
           <el-table-column label="性别" width="70">
             <template #default="scope">
               {{ scope.row.gender === 1 ? '女' : '男' }}
@@ -73,7 +75,10 @@
                 @click="openHandle('edit', scope.row)"
                 >编辑</el-button
               >
-              <el-button type="primary" size="small" @click="remove"
+              <el-button
+                type="primary"
+                size="small"
+                @click="remove(scope.row.id)"
                 >删除</el-button
               >
             </template>
@@ -102,7 +107,11 @@
           <el-input v-model="formData.username" autocomplete="off" />
         </el-form-item>
         <el-form-item label="密码">
-          <el-input v-model="formData.password" autocomplete="off" />
+          <el-input
+            v-model="formData.password"
+            type="password"
+            autocomplete="off"
+          />
         </el-form-item>
         <el-form-item label="性别">
           <el-select v-model="formData.gender" autocomplete="off">
@@ -117,16 +126,14 @@
         <el-form-item label="住址">
           <el-input v-model="formData.address" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="启用" :label-width="formLabelWidth">
+        <el-form-item label="启用">
           <el-switch v-model="formData.enabled" inline-prompt />
         </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="closeHandle">退出</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false">
-            添加
-          </el-button>
+          <el-button type="primary" @click="handleOperate">确认</el-button>
         </span>
       </template>
     </el-dialog>
@@ -134,7 +141,7 @@
 </template>
 
 <script setup>
-import { get } from '@/request/utils'
+import { get, post } from '@/request/utils'
 import { reactive } from 'vue'
 
 let list = ref([])
@@ -150,18 +157,16 @@ const listQuery = reactive({
   gender: '',
 })
 
-function handleChange() {
+function getData() {
   get('/api/user/find', {
-    page: pageInfo.page,
-    pageSize: pageInfo.pageSize,
-    user: listQuery.user,
-    gender: listQuery.gender,
+    ...pageInfo,
+    ...listQuery,
   }).then((res) => {
     list.value = res.data
     count.value = res.count
   })
 }
-
+// 对话框数据
 const modalStatus = reactive({
   dialogFormVisible: false,
   // 定义的对话框标题对象
@@ -171,15 +176,7 @@ const modalStatus = reactive({
   },
   status: '', // 对应的 key
 })
-let formData = reactive({
-  username: '',
-  password: '',
-  gender: '',
-  phone: '',
-  address: '',
-  enabled: true,
-})
-
+// 打开对话框操作
 function openHandle(status, row) {
   if (status === 'edit') {
     Object.keys(formData).map((key) => {
@@ -189,7 +186,7 @@ function openHandle(status, row) {
   modalStatus.status = status
   modalStatus.dialogFormVisible = true
 }
-
+// 关闭对话框
 function closeHandle() {
   modalStatus.dialogFormVisible = false
   Object.keys(formData).map((key) => {
@@ -197,10 +194,68 @@ function closeHandle() {
   })
 }
 
-function add() {}
+// 表单数据
+let formData = reactive({
+  id: '',
+  username: '',
+  password: '',
+  gender: '',
+  phone: '',
+  address: '',
+  enabled: true,
+  crerateTime: '',
+})
+// 添加和修改
+function handleOperate() {
+  if (modalStatus.status === 'add') {
+    post('/api/user/add', { ...formData }).then((res) => {
+      if (res.code === 0) {
+        ElMessage({
+          message: res.msg,
+          type: 'success',
+        })
+        getData()
+        closeHandle()
+      }
+    })
+  }
+
+  if (modalStatus.status === 'edit') {
+    post('/api/user/edit', { ...formData }).then((res) => {
+      if (res.code === 0) {
+        ElMessage({
+          message: res.msg,
+          type: 'success',
+        })
+        getData()
+        closeHandle()
+      }
+    })
+  }
+}
+// 删除
+function remove(id) {
+  ElMessageBox.confirm('确认删除？', '警告', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning',
+  })
+    .then((res) => {
+      get('/api/user/remove', { id }).then((res) => {
+        if (res.code === 0) {
+          ElMessage({
+            message: res.msg,
+            type: 'success',
+          })
+          getData()
+        }
+      })
+    })
+    .catch(() => {})
+}
 
 // 用监听器监听页数的改变
-watch(pageInfo, () => handleChange(), { immediate: true })
+watch(pageInfo, () => getData(), { immediate: true })
 </script>
 
 <style scoped></style>
