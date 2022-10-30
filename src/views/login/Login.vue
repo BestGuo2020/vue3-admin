@@ -43,9 +43,9 @@
 
 <script setup>
 import bg from './components/Background.vue'
-import handleLogin from './hooks/useLogin'
+import useLogin from './hooks/useLogin'
 
-const { loginForm, login, ruleFormRef, formRules } = handleLogin()
+const { loginForm, login, ruleFormRef, formRules, loading } = useLogin()
 </script>
 
 <style lang="scss" scoped>

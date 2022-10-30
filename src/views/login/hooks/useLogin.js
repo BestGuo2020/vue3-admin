@@ -63,5 +63,5 @@ export default function () {
     })
   }
 
-  return { loginForm, login, ruleFormRef, formRules }
+  return { loginForm, login, ruleFormRef, formRules, loading }
 }
