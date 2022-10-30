@@ -92,6 +92,7 @@
     <el-dialog
       v-model="modalStatus.dialogFormVisible"
       :title="modalStatus.titles[modalStatus.status]"
+      @closed="closeHandle"
     >
       <el-form :model="formData" label-width="80px" style="width: 97%">
         <el-form-item label="用户名">
@@ -119,9 +120,7 @@
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="modalStatus.dialogFormVisible = false"
-            >退出</el-button
-          >
+          <el-button @click="closeHandle">退出</el-button>
           <el-button type="primary" @click="dialogFormVisible = false">
             添加
           </el-button>
@@ -169,8 +168,7 @@ const modalStatus = reactive({
   },
   status: '', // 对应的 key
 })
-
-const formData = reactive({
+let formData = reactive({
   username: '',
   password: '',
   gender: '',
@@ -182,6 +180,13 @@ const formData = reactive({
 function openHandle(status) {
   modalStatus.status = status
   modalStatus.dialogFormVisible = true
+}
+
+function closeHandle() {
+  modalStatus.dialogFormVisible = false
+  Object.keys(formData).map((key) => {
+    delete formData[key]
+  })
 }
 
 function add() {}
