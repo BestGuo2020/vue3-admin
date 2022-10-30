@@ -9,7 +9,7 @@
           v-if="item.children && item.children.length === 1"
           :index="'/' + item.children[0].path"
         >
-          <el-icon :class="item.meta.icon"></el-icon>
+          <el-icon :class="[item.meta.icon, 'icon-size']"></el-icon>
           <span>{{ item.children[0].meta.title }}</span>
         </el-menu-item>
         <!-- 子菜单有多个时，遍历子菜单，同时要附带下拉图标，没有子菜单项的就不展示 -->
@@ -18,7 +18,7 @@
           :index="item.path"
         >
           <template #title>
-            <el-icon :class="item.meta.icon"></el-icon
+            <el-icon :class="[item.meta.icon, 'icon-size']"></el-icon
             ><span>{{ item.meta.title }}</span>
           </template>
           <el-menu-item
@@ -26,7 +26,7 @@
             :key="subitem.meta.title"
             :index="item.path + '/' + subitem.path"
           >
-            <el-icon :class="subitem.meta.icon"></el-icon
+            <el-icon :class="[subitem.meta.icon, 'icon-size']"></el-icon
             ><span>{{ subitem.meta.title }}</span>
           </el-menu-item>
         </el-sub-menu>
@@ -99,5 +99,8 @@ let generateRoutes = router.getRoutes()
 .is-opened {
   opacity: 1;
   background: hsla(0, 0%, 100%, 0.05);
+}
+.icon-size {
+  font-size: 14px !important;
 }
 </style>

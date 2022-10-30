@@ -43,7 +43,7 @@ import screenfull from 'screenfull'
 import Notification from './Notification.vue'
 
 // 定义并关闭左侧菜单折叠
-const collapse = ref(true)
+const collapse = ref(false)
 function handleCollapse() {
   collapse.value = !collapse.value
   emitter.emit('collapse', collapse.value)
