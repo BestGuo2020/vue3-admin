@@ -4,14 +4,24 @@
     <h2>This is not the web page youare looking for.</h2>
     <p>请联系系统管理员进行处理，我们会尽快修复。您可以：</p>
     <div class="errorpPage-operate">
-      <RouterLink to="/" class="operateBtn" title="返回首页"
-        >返回首页</RouterLink
-      >
+      <a class="operateBtn" title="返回首页" @click="back">返回首页</a>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+function back() {
+  if (localStorage.getItem('token')) {
+    router.back()
+  } else {
+    router.push('/login')
+  }
+}
+</script>
 <style lang="scss" scoped>
 * {
   margin: 0px;
@@ -23,6 +33,7 @@
 a {
   text-decoration: none;
   color: #1064a0;
+  cursor: pointer;
 }
 
 h1,
