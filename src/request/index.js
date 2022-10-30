@@ -1,4 +1,5 @@
 import axios from 'axios'
+import router from '../router'
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -19,6 +20,19 @@ instance.interceptors.response.use(
     console.log('收到的响应拦截', config)
     // 正常请求
     if (config.status === 200) {
+      // 判断登录状态是否过期
+      if (config.data.code === -1) {
+        ElMessage({
+          message: '登录状态过期，请重新登录！',
+          type: 'error',
+          onClose: () => {
+            console.log(router)
+            localStorage.removeItem('token')
+            router.push('/login')
+          },
+        })
+        return null
+      }
       return config.data
     }
     return config

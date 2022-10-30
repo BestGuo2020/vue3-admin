@@ -40,6 +40,10 @@ export default [
     url: '/api/user/add',
     method: 'post',
     response: (req) => {
+      if (!req.headers.token || req.headers.token !== 'bestguo2020') {
+        return { code: -1 }
+      }
+
       let data = req.body
       data.id = new Date().getTime()
       data.createTime = moment(data.id).format('YYYY-MM-DD HH:mm:ss')
@@ -55,6 +59,10 @@ export default [
     url: '/api/user/edit',
     method: 'post',
     response: (req) => {
+      if (!req.headers.token || req.headers.token !== 'bestguo2020') {
+        return { code: -1 }
+      }
+
       let data = req.body
 
       console.log(data)
@@ -75,6 +83,10 @@ export default [
     url: '/api/user/remove',
     method: 'get',
     response: (req) => {
+      if (!req.headers.token || req.headers.token !== 'bestguo2020') {
+        return { code: -1 }
+      }
+
       users = users.filter((item) => req.query.id !== item.id)
       return {
         code: 0,

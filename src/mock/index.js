@@ -12,7 +12,7 @@ export default [
           code: 0,
           msg: '',
           data: {
-            username,
+            username: 'admin',
             roles: ['admin'],
             header: 'https://avatars.githubusercontent.com/u/45250038?v=4',
             token: 'bestguo2020',
