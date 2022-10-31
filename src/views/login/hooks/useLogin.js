@@ -51,9 +51,9 @@ export default function () {
                 localStorage.setItem('token', res.data.token)
                 // 跳转到上次的位置
                 if (route.query.redirect) {
-                  router.push(route.query.redirect)
+                  router.replace(route.query.redirect)
                 } else {
-                  router.push('/')
+                  router.replace('/')
                 }
               },
             })
