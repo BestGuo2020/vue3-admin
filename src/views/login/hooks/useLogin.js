@@ -1,10 +1,11 @@
 import { post } from '@/request/utils'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useMainStore } from '@/store/index'
 
 export default function () {
   // 路由引入
   const router = useRouter()
+  const route = useRoute()
   const mainStore = useMainStore()
 
   // 登录表单中的数据
@@ -48,8 +49,12 @@ export default function () {
                 // 保存用户信息并将token存到本地和state
                 mainStore.userInfo = res.data
                 localStorage.setItem('token', res.data.token)
-                // 跳转
-                router.push('/')
+                // 跳转到上次的位置
+                if (route.query.redirect) {
+                  router.push(route.query.redirect)
+                } else {
+                  router.push('/')
+                }
               },
             })
           } else {

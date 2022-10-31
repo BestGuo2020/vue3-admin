@@ -26,9 +26,14 @@ instance.interceptors.response.use(
           message: '登录状态过期，请重新登录！',
           type: 'error',
           onClose: () => {
-            console.log(router)
+            console.log(router.currentRoute.value.path)
             localStorage.removeItem('token')
-            router.push('/login')
+            router.push({
+              path: '/login',
+              query: {
+                redirect: router.currentRoute.value.path,
+              },
+            })
           },
         })
         return null
