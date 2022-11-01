@@ -39,7 +39,6 @@ router.beforeEach((to, from, next) => {
     } else {
       // 没有就获取路由数据并动态添加，并设置为加载完成
       generateRoutes().then(res => {
-        console.log(res)
         res.forEach(item => {
           router.addRoute(item)
         })
