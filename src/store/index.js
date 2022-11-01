@@ -6,7 +6,7 @@ export const useMainStore = defineStore('main', () => {
   let routeLoaded = ref(false) // 路由是否加载完成
 
   function getUserInfo() {
-    get('/api/userinfo', {}).then((res) => {
+    get('/api/userinfo', {}).then(res => {
       if (res.code === 0) {
         userInfo.value = res.data
       }

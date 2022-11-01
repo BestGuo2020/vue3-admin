@@ -6,7 +6,7 @@ export default [
   {
     url: '/api/userinfo',
     method: 'post',
-    response: (req) => {
+    response: req => {
       if (req.headers.token) {
         return {
           code: 0,

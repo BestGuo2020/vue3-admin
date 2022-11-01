@@ -39,7 +39,7 @@ export default function () {
       if (valid) {
         // 登录
         loading.value = true
-        post('/api/login', { username, password }).then((res) => {
+        post('/api/login', { username, password }).then(res => {
           if (res.code === 0) {
             ElMessage({
               type: 'success',

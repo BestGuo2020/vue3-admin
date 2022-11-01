@@ -30,7 +30,7 @@ export const routes = [
 
 function handle(menu) {
   const generate = []
-  menu.forEach((item) => {
+  menu.forEach(item => {
     const i = {
       component: components[item.sign],
       path: item.path,

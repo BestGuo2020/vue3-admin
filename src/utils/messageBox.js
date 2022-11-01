@@ -22,7 +22,7 @@ export function alert(content, call) {
   if (call) {
     ElMessageBox.alert(content, '提示', {
       confirmButtonText: '确定',
-      callback: (action) => call(action),
+      callback: action => call(action),
     })
   } else {
     ElMessageBox.alert(content, '提示', {

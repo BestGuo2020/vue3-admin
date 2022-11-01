@@ -2,7 +2,7 @@ export default [
   {
     url: '/api/login',
     method: 'post',
-    response: (req) => {
+    response: req => {
       let { username, password } = req.body
       if (username === 'admin' && password === '123456') {
         return {

@@ -27,7 +27,7 @@ export function tabsOperation() {
   watch(route, (to, from) => {
     console.log('路由被触发', to)
     // 用户可能会从侧边栏打开新内容，判断新 tab 是否存在于 openedMenu 数组中
-    openedMenu.value = openedMenu.value.map((item) => {
+    openedMenu.value = openedMenu.value.map(item => {
       if (to.path !== item.path) {
         item.effect = 'plain'
       } else {
@@ -36,7 +36,7 @@ export function tabsOperation() {
       return item
     })
     // 判断该选项卡是否打开
-    let exist = openedMenu.value.some((item) => item.path === to.path)
+    let exist = openedMenu.value.some(item => item.path === to.path)
     if (!exist) {
       // 添加
       openedMenu.value.push({
@@ -61,13 +61,13 @@ export function tabsOperation() {
       router.replace(openedMenu.value[tabIndex - 1].path)
     }
     // 过滤出除自己以外的选项卡
-    openedMenu.value = openedMenu.value.filter((item) => e !== item)
+    openedMenu.value = openedMenu.value.filter(item => e !== item)
   }
   // 选项卡被点击
   function tabClick(e) {
     console.log('选项卡被点击，路由跳转触发')
     // 修改 tab 样式
-    openedMenu.value = openedMenu.value.map((item) => {
+    openedMenu.value = openedMenu.value.map(item => {
       if (e.path === item.path) {
         item.effect = 'dark'
       } else {

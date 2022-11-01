@@ -61,7 +61,7 @@ export default [
   {
     url: '/api/menu',
     method: 'get',
-    response: (req) => {
+    response: req => {
       if (req.headers.token) {
         return {
           code: 0,

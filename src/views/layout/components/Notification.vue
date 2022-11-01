@@ -110,7 +110,7 @@ let count = ref(0)
 watch(
   notificationData,
   () => {
-    count.value = notificationData.value.filter((item) => !item.read).length
+    count.value = notificationData.value.filter(item => !item.read).length
     title.value = count.value === 0 ? `消息` : `消息（${count.value}）`
   },
   { immediate: true, deep: true }
@@ -123,7 +123,7 @@ function handleReadMessage(item) {
 }
 // 改变所有
 function handleReadAll() {
-  notificationData.value = notificationData.value.map((item) => {
+  notificationData.value = notificationData.value.map(item => {
     if (!item.read) {
       item.read = true
     }
@@ -136,7 +136,7 @@ function handleDeleteMessage(item) {
   warningConfirm('确定删除该条通知？')
     .then(() => {
       notificationData.value = notificationData.value.filter(
-        (elem) => elem !== item
+        elem => elem !== item
       )
     })
     .catch(() => {})

@@ -7,7 +7,7 @@ const instance = axios.create({
 })
 
 // 请求前的拦截处理
-instance.interceptors.request.use((config) => {
+instance.interceptors.request.use(config => {
   console.log(config)
   // 协带 token
   config.headers.token = localStorage.getItem('token')
@@ -16,7 +16,7 @@ instance.interceptors.request.use((config) => {
 
 // 响应拦截器处理
 instance.interceptors.response.use(
-  (config) => {
+  config => {
     console.log('收到的响应拦截', config)
     // 正常请求
     if (config.status === 200) {
@@ -42,7 +42,7 @@ instance.interceptors.response.use(
     }
     return config
   },
-  (error) => {
+  error => {
     return Promise.reject(error)
   }
 )

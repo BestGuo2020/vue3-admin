@@ -43,7 +43,7 @@ import emitter from '@/utils/bus'
 
 let fold = ref(false)
 
-emitter.on('collapse', (val) => {
+emitter.on('collapse', val => {
   fold.value = val
   console.log(val)
 })
