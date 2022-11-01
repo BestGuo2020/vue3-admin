@@ -4,7 +4,7 @@
     <h2>This is not the web page youare looking for.</h2>
     <p>请联系系统管理员进行处理，我们会尽快修复。您可以：</p>
     <div class="errorpPage-operate">
-      <a class="operateBtn" title="返回首页" @click="back">返回首页</a>
+      <a class="operateBtn" title="返回首页" @click="back">返回</a>
     </div>
   </div>
 </template>
@@ -15,11 +15,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 function back() {
-  if (localStorage.getItem('token')) {
-    router.back()
-  } else {
-    router.push('/login')
-  }
+  router.back()
 }
 </script>
 <style lang="scss" scoped>
