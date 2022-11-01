@@ -47,12 +47,14 @@ router.beforeEach((to, from, next) => {
         next({ ...to, replace: true })
       })
     }
-  } else if (whitelist.indexOf(to.path) !== -1) {
-    // token 没有，就找找白名单中的
-    next()
   } else {
-    // 白名单中还没有，就跳到路径不存在页
-    next({ path: '/404' })
+    // token 没有，就找找白名单中的
+    if (whitelist.indexOf(to.path) !== -1) {
+      next()
+    } else {
+      // 白名单中还没有，默认跳到登录页
+      next({ path: '/login' })
+    }
   }
 })
 

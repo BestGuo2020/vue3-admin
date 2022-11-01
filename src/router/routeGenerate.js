@@ -53,6 +53,10 @@ export async function generateRoutes() {
   if (res.code === 0) {
     const menu = res.data
     const data = handle(menu)
+    data.push({
+      path: '/:catchAll(.*)',
+      redirect: '/404',
+    })
     return Promise.resolve(data)
   }
 
