@@ -5,7 +5,9 @@
     "dev": "vite --mode dev",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "npx eslint src/**/*.{js,jsx,vue} --fix"
+    "lint": "npx eslint src/**/*.{js,jsx,vue} --fix",
+    "prettier": "prettier --write .",
+    "format": "npm run lint && npm run prettier"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
