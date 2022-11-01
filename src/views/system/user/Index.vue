@@ -27,10 +27,19 @@
     </el-row>
     <el-row>
       <el-col :span="24">
-        <el-button>删除</el-button>
-      </el-col>
-      <el-col :span="24">
-        <el-table ref="userRef" :data="list" style="width: 100%" :border="true">
+        <el-button
+          style="margin-bottom: 10px"
+          type="danger"
+          @click="batchDelete"
+          >删除</el-button
+        >
+        <el-table
+          ref="userRef"
+          :data="list"
+          style="width: 100%"
+          :border="true"
+          @selection-change="handleSelectionChange"
+        >
           <el-table-column type="selection" label="全选" width="55" />
           <el-table-column label="id" width="140">
             <template #default="scope">{{ scope.row.id }}</template>
@@ -76,7 +85,7 @@
                 >编辑</el-button
               >
               <el-button
-                type="primary"
+                type="danger"
                 size="small"
                 @click="remove(scope.row.id)"
                 >删除</el-button
@@ -142,7 +151,7 @@
 
 <script setup>
 import { get, post } from '@/request/utils'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
 let list = ref([])
 let count = ref(0)
@@ -161,7 +170,7 @@ function getData() {
   get('/api/user/find', {
     ...pageInfo,
     ...listQuery,
-  }).then((res) => {
+  }).then(res => {
     list.value = res.data
     count.value = res.count
   })
@@ -179,7 +188,7 @@ const modalStatus = reactive({
 // 打开对话框操作
 function openHandle(status, row) {
   if (status === 'edit') {
-    Object.keys(formData).map((key) => {
+    Object.keys(formData).map(key => {
       formData[key] = row[key]
     })
   }
@@ -189,7 +198,7 @@ function openHandle(status, row) {
 // 关闭对话框
 function closeHandle() {
   modalStatus.dialogFormVisible = false
-  Object.keys(formData).map((key) => {
+  Object.keys(formData).map(key => {
     formData[key] = ''
   })
 }
@@ -208,7 +217,7 @@ let formData = reactive({
 // 添加和修改
 function handleOperate() {
   if (modalStatus.status === 'add') {
-    post('/api/user/add', { ...formData }).then((res) => {
+    post('/api/user/add', { ...formData }).then(res => {
       if (res.code === 0) {
         ElMessage({
           message: res.msg,
@@ -221,7 +230,7 @@ function handleOperate() {
   }
 
   if (modalStatus.status === 'edit') {
-    post('/api/user/edit', { ...formData }).then((res) => {
+    post('/api/user/edit', { ...formData }).then(res => {
       if (res.code === 0) {
         ElMessage({
           message: res.msg,
@@ -240,8 +249,33 @@ function remove(id) {
     cancelButtonText: '取消',
     type: 'warning',
   })
-    .then((res) => {
-      get('/api/user/remove', { id }).then((res) => {
+    .then(() => {
+      get('/api/user/remove', { id }).then(res => {
+        if (res.code === 0) {
+          ElMessage({
+            message: res.msg,
+            type: 'success',
+          })
+          getData()
+        }
+      })
+    })
+    .catch(() => {})
+}
+let multipleSelection = ref([])
+// 选中项
+function handleSelectionChange(val) {
+  multipleSelection.value = val.map(item => item.id)
+}
+// 模拟批量删除
+function batchDelete() {
+  ElMessageBox.confirm('确认删除选中项？', '警告', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning',
+  })
+    .then(() => {
+      post('/api/user/removes', { ids: multipleSelection.value }).then(res => {
         if (res.code === 0) {
           ElMessage({
             message: res.msg,

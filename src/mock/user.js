@@ -19,7 +19,7 @@ export default [
   {
     url: '/api/user/find',
     method: 'get',
-    response: (req) => {
+    response: req => {
       // 模拟的分页采用 slice 方法分页，仅供参考，真正的后端应采用 limit 来进行分页
       let page = parseInt(req.query.page)
       let pageSize = parseInt(req.query.pageSize)
@@ -39,7 +39,7 @@ export default [
   {
     url: '/api/user/add',
     method: 'post',
-    response: (req) => {
+    response: req => {
       if (!req.headers.token || req.headers.token !== 'bestguo2020') {
         return { code: -1 }
       }
@@ -58,7 +58,7 @@ export default [
   {
     url: '/api/user/edit',
     method: 'post',
-    response: (req) => {
+    response: req => {
       if (!req.headers.token || req.headers.token !== 'bestguo2020') {
         return { code: -1 }
       }
@@ -66,7 +66,7 @@ export default [
       let data = req.body
 
       console.log(data)
-      users = users.map((item) => {
+      users = users.map(item => {
         if (item.id === data.id) {
           return data
         }
@@ -82,12 +82,26 @@ export default [
   {
     url: '/api/user/remove',
     method: 'get',
-    response: (req) => {
+    response: req => {
       if (!req.headers.token || req.headers.token !== 'bestguo2020') {
         return { code: -1 }
       }
 
-      users = users.filter((item) => req.query.id !== item.id)
+      users = users.filter(item => req.query.id !== item.id)
+      return {
+        code: 0,
+        msg: '删除成功！',
+      }
+    },
+  },
+  {
+    url: '/api/user/removes',
+    method: 'post',
+    response: req => {
+      if (!req.headers.token || req.headers.token !== 'bestguo2020') {
+        return { code: -1 }
+      }
+      users = users.filter(item => req.body.ids.indexOf(item.id) === -1)
       return {
         code: 0,
         msg: '删除成功！',
