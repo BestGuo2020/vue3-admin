@@ -1,6 +1,12 @@
 <template>
   <div class="page-container">
     <el-row>
+      <el-alert
+        title="注意：这里仅仅展示页面效果，较完整的权限系统正结合 Java 后端开发中"
+        type="warning"
+      />
+    </el-row>
+    <el-row>
       <el-col :span="24">
         <el-form :inline="true" :model="listQuery">
           <el-form-item label="角色名">
@@ -104,20 +110,10 @@
     >
       <el-form :model="formData" label-width="80px" style="width: 97%">
         <el-form-item label="角色名">
-          <el-input v-model="formData.rolename" autocomplete="off" />
+          <el-input v-model="formData.name" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="性别">
-          <el-select v-model="formData.gender" autocomplete="off">
-            <el-option label="请选择" value="" />
-            <el-option label="男" :value="0" />
-            <el-option label="女" :value="1" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="手机">
-          <el-input v-model="formData.phone" autocomplete="off" />
-        </el-form-item>
-        <el-form-item label="住址">
-          <el-input v-model="formData.address" autocomplete="off" />
+        <el-form-item label="角色描述">
+          <el-input v-model="formData.description" autocomplete="off" />
         </el-form-item>
         <el-form-item label="启用">
           <el-switch v-model="formData.enabled" inline-prompt />
@@ -190,13 +186,9 @@ function closeDialogHandle() {
 // 表单数据
 let formData = reactive({
   id: '',
-  rolename: '',
-  password: '',
-  gender: '',
-  phone: '',
-  address: '',
+  name: '',
+  description: '',
   enabled: true,
-  createTime: '',
 })
 // 添加和修改
 function handleOperate() {

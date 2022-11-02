@@ -10,6 +10,7 @@
  */
 const menus = [
   {
+    id: 1,
     sign: 'root',
     title: '主页',
     path: '/',
@@ -17,6 +18,7 @@ const menus = [
     fullpath: '/',
     children: [
       {
+        id: 2,
         sign: 'dashboard',
         title: '仪表板',
         icon: 'fa-solid fa-gauge',
@@ -26,6 +28,7 @@ const menus = [
     ],
   },
   {
+    id: 3,
     sign: 'root',
     title: '系统设置',
     path: '/system',
@@ -33,6 +36,7 @@ const menus = [
     fullpath: '/system',
     children: [
       {
+        id: 4,
         sign: 'user',
         icon: 'fa-regular fa-user',
         title: '用户管理',
@@ -40,6 +44,7 @@ const menus = [
         fullpath: '/system/user',
       },
       {
+        id: 5,
         sign: 'role',
         icon: 'fa-regular fa-circle',
         path: 'role',
@@ -47,6 +52,7 @@ const menus = [
         fullpath: '/system/role',
       },
       {
+        id: 6,
         sign: 'power',
         icon: 'fa-regular fa-circle',
         path: 'power',
