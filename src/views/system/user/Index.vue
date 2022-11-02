@@ -68,7 +68,7 @@
           <el-table-column label="状态" width="100">
             <template #default="scope">
               <el-tag v-if="scope.row.enabled" type="success">启用</el-tag>
-              <el-tag v-else type="denger">禁用</el-tag>
+              <el-tag v-else type="danger">禁用</el-tag>
             </template>
           </el-table-column>
           <el-table-column label="创建时间">
