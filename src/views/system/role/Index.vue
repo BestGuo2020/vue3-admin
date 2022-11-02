@@ -72,8 +72,8 @@
               <el-button
                 type="primary"
                 size="small"
-                @click="openDialogHandle('edit', scope.row)"
-                >授予</el-button
+                @click="openAuthorizeHandle('edit', scope.row)"
+                >授权</el-button
               >
               <el-button
                 type="danger"
@@ -253,7 +253,8 @@ function batchDelete() {
     })
     .catch(() => {})
 }
-
+// 授权
+function openAuthorizeHandle() {}
 // 用监听器监听页数的改变
 watch(pageInfo, () => getData(), { immediate: true })
 // 日期格式化
