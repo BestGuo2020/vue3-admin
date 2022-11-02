@@ -11,3 +11,8 @@
 .el-form--inline .el-form-item {
   margin-bottom: 0;
 }
+.td-word {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
