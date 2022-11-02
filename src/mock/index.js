@@ -1,7 +1,9 @@
 import login from './login'
+import role from './role'
 
 export default [
   ...login,
+  ...role,
   // 模拟获取用户信息
   {
     url: '/api/userinfo',

@@ -50,7 +50,7 @@ const menus = [
         sign: 'power',
         icon: 'fa-regular fa-circle',
         path: 'power',
-        title: '权限管理',
+        title: '菜单管理',
         fullpath: '/system/power',
       },
     ],

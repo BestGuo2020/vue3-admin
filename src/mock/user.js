@@ -1,4 +1,4 @@
-import moment from 'moment/moment'
+import dayjs from 'dayjs'
 
 let users = []
 
@@ -46,7 +46,7 @@ export default [
 
       let data = req.body
       data.id = new Date().getTime()
-      data.createTime = moment(data.id).format('YYYY-MM-DD HH:mm:ss')
+      data.createTime = dayjs(data.id).format('YYYY-MM-DD HH:mm:ss')
       users.push(data)
 
       return {
