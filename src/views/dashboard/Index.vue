@@ -9,7 +9,7 @@
               <el-tag>今日数据</el-tag>
             </div>
           </template>
-          <div ref="access">1111</div>
+          <AnimateNumber :value="1145" />
         </el-card>
       </el-col>
       <el-col :span="6">
@@ -20,7 +20,7 @@
               <el-tag>今日数据</el-tag>
             </div>
           </template>
-          <div ref="recharge">1111</div>
+          <AnimateNumber :value="1419" />
         </el-card>
       </el-col>
       <el-col :span="6">
@@ -31,10 +31,10 @@
               <el-tag>今日数据</el-tag>
             </div>
           </template>
-          <div ref="plays">1111</div>
+          <AnimateNumber :value="1918" />
         </el-card>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="6" @click="update">
         <el-card class="box-card" shadow="never">
           <template #header>
             <div class="card-header">
@@ -42,7 +42,7 @@
               <el-tag>今日数据</el-tag>
             </div>
           </template>
-          <div ref="users">1111</div>
+          <AnimateNumber ref="animateNumber" :value="114514" />
         </el-card>
       </el-col>
     </el-row>
@@ -50,27 +50,14 @@
 </template>
 
 <script setup>
-import { CountUp } from 'countup.js'
 import { onMounted } from 'vue'
+import AnimateNumber from '@/components/AnimateNumber/Index'
 
-const access = ref(null)
-const recharge = ref(null)
-const plays = ref(null)
-const users = ref(null)
+const animateNumber = ref(null)
 
-onMounted(() => {
-  let accessCount = new CountUp(access.value, 7368)
-  accessCount.start()
-
-  let rechargeCount = new CountUp(recharge.value, 2341)
-  rechargeCount.start()
-
-  let playsCount = new CountUp(plays.value, 1145)
-  playsCount.start()
-
-  let usersCount = new CountUp(users.value, 1419)
-  usersCount.start()
-})
+function update() {
+  animateNumber.value.updateValue(67998)
+}
 </script>
 
 <style scoped>
