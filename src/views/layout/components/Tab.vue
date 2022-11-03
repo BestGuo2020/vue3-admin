@@ -53,7 +53,7 @@ const showSide = ref(true)
 
 // 左按钮（其实是向右移动，右按钮反之）
 function translateLeftHandle() {
-  const everyTimeOffset = tablistwrap.value.offsetWidth
+  const everyTimeOffset = 200
 
   // 如果偏移量为0，就不再点左端了
   if (offset.value < 0) {
@@ -67,7 +67,7 @@ function translateLeftHandle() {
 }
 
 function translateRightHandle() {
-  const everyTimeOffset = tablistwrap.value.offsetWidth
+  const everyTimeOffset = 200
 
   // 计算出 tab-list 和 tab-list-wrapper 的差值，也就是右侧不可见的长度部分
   // 差值≤0：不移动，差值>0，移动
