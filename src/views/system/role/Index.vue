@@ -2,8 +2,10 @@
   <div class="page-container">
     <el-row>
       <el-alert
-        title="注意：这里仅仅展示页面效果，较完整的权限系统正结合 Java 后端开发中"
-        type="warning"
+        show-icon
+        title="这里仅仅展示页面效果，较完整的权限系统正结合 Java 后端开发中"
+        effect="dark"
+        type="info"
       />
     </el-row>
     <el-row>
