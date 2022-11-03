@@ -1,9 +1,17 @@
 <template>
   <div class="tabs-container">
     <!-- 选项卡 -->
-    <span class="left-side fa-solid fa-chevron-left"></span>
-    <div class="tab-list-wrapper">
-      <div ref="tabwrapper" class="tab-list">
+    <span
+      v-show="showSide"
+      class="left-side fa-solid fa-chevron-left"
+      @click="translateLeftHandle"
+    ></span>
+    <div ref="tablistwrap" class="tab-list-wrapper">
+      <div
+        ref="tablist"
+        class="tab-list"
+        :style="{ transform: `translate(${offset}px)` }"
+      >
         <template v-for="(item, index) in openedMenu" :key="item.path">
           <el-tag
             v-if="index === 0"
@@ -26,7 +34,11 @@
         </template>
       </div>
     </div>
-    <span class="right-side fa-solid fa-chevron-right"></span>
+    <span
+      v-show="showSide"
+      class="right-side fa-solid fa-chevron-right"
+      @click="translateRightHandle"
+    ></span>
   </div>
 </template>
 
@@ -34,8 +46,24 @@
 import { tabsOperation } from '../hooks/useTabs'
 const { openedMenu, tabClose, tabClick } = tabsOperation()
 
-const tabwrapper = ref()
-console.log(tabwrapper)
+const offset = ref(0)
+const tablist = ref()
+const tablistwrap = ref()
+const showSide = ref(true)
+// 左按钮（其实是向右移动，右按钮反之）
+function translateLeftHandle() {
+  // 如果已经移到了最左端，就不能再点左端了
+  if (offset.value !== 0) {
+    offset.value += 100
+  }
+}
+
+function translateRightHandle() {
+  // tab-list 中的宽度是随着 tab 撑大的，如果超过了父元素的宽度就可以移动了
+  if (tablist.value.offsetWidth > tablistwrap.value.offsetWidth) {
+    offset.value -= 100
+  }
+}
 </script>
 <style lang="scss" scoped>
 .tabs-container {
