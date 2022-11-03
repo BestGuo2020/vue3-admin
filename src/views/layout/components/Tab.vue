@@ -50,18 +50,39 @@ const offset = ref(0)
 const tablist = ref()
 const tablistwrap = ref()
 const showSide = ref(true)
+
 // 左按钮（其实是向右移动，右按钮反之）
 function translateLeftHandle() {
-  // 如果已经移到了最左端，就不能再点左端了
-  if (offset.value !== 0) {
-    offset.value += 100
+  const everyTimeOffset = tablistwrap.value.offsetWidth
+
+  // 如果偏移量为0，就不再点左端了
+  if (offset.value < 0) {
+    // 判断左偏移时大于0的情况
+    if (offset.value + everyTimeOffset >= 0) {
+      offset.value += Math.abs(offset.value)
+    } else {
+      offset.value += everyTimeOffset
+    }
   }
 }
 
 function translateRightHandle() {
-  // tab-list 中的宽度是随着 tab 撑大的，如果超过了父元素的宽度就可以移动了
-  if (tablist.value.offsetWidth > tablistwrap.value.offsetWidth) {
-    offset.value -= 100
+  const everyTimeOffset = tablistwrap.value.offsetWidth
+
+  // 计算出 tab-list 和 tab-list-wrapper 的差值，也就是右侧不可见的长度部分
+  // 差值≤0：不移动，差值>0，移动
+  let deltaWidth = tablist.value.offsetWidth - tablistwrap.value.offsetWidth
+
+  // tab-list 中的宽度是由 tab 撑大的，如果超过了父元素的宽度就可以移动了
+  if (deltaWidth > 0) {
+    let remainWidth = deltaWidth - Math.abs(offset.value)
+
+    // 剩余右侧不可见长度在100以上，继续用100减，在 100 以内则用remainWidth减去
+    if (remainWidth >= everyTimeOffset) {
+      offset.value -= everyTimeOffset
+    } else if (remainWidth > 0 && remainWidth < everyTimeOffset) {
+      offset.value -= remainWidth
+    }
   }
 }
 </script>
