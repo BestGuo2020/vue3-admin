@@ -2,27 +2,29 @@
   <div class="tabs-container">
     <!-- 选项卡 -->
     <span class="left-side fa-solid fa-chevron-left"></span>
-    <div class="tab-list">
-      <template v-for="(item, index) in openedMenu" :key="item.path">
-        <el-tag
-          v-if="index === 0"
-          class="mx-1 tab-item tab-item-first"
-          :effect="item.effect"
-          :closable="item.closeable"
-          @close="tabClose(item)"
-          @click="tabClick(item)"
-          >{{ item.title }}</el-tag
-        >
-        <el-tag
-          v-else
-          class="mx-1 tab-item"
-          :effect="item.effect"
-          :closable="item.closeable"
-          @close="tabClose(item)"
-          @click="tabClick(item)"
-          >{{ item.title }}</el-tag
-        >
-      </template>
+    <div class="tab-list-wrapper">
+      <div ref="tabwrapper" class="tab-list">
+        <template v-for="(item, index) in openedMenu" :key="item.path">
+          <el-tag
+            v-if="index === 0"
+            class="mx-1 tab-item tab-item-first"
+            :effect="item.effect"
+            :closable="item.closeable"
+            @close="tabClose(item)"
+            @click="tabClick(item)"
+            >{{ item.title }}</el-tag
+          >
+          <el-tag
+            v-else
+            class="mx-1 tab-item"
+            :effect="item.effect"
+            :closable="item.closeable"
+            @close="tabClose(item)"
+            @click="tabClick(item)"
+            >{{ item.title }}</el-tag
+          >
+        </template>
+      </div>
     </div>
     <span class="right-side fa-solid fa-chevron-right"></span>
   </div>
@@ -31,22 +33,28 @@
 <script setup>
 import { tabsOperation } from '../hooks/useTabs'
 const { openedMenu, tabClose, tabClick } = tabsOperation()
+
+const tabwrapper = ref()
+console.log(tabwrapper)
 </script>
 <style lang="scss" scoped>
 .tabs-container {
   display: flex;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+.tab-list-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
 .tab-list {
   margin-bottom: 0;
   white-space: nowrap;
-  position: relative;
-  width: 100%;
+  width: min-content;
+  transition: transform 0.5s;
 }
 .tab-item {
   margin: 8px 8px 8px 0;
   cursor: pointer;
-  transform: translateX(0);
 }
 .tab-item-first {
   margin: 8px;
