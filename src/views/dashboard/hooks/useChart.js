@@ -29,6 +29,12 @@ export function useFlowData() {
         snap: true,
       },
     },
+    grid: {
+      x: 70,
+      y: 50,
+      x2: 40,
+      y2: 55,
+    },
   })
 
   function loadData(chart) {

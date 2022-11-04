@@ -12,7 +12,7 @@ const props = defineProps({
     type: Object,
     default: () => {
       return {
-        height: '400px',
+        height: '350px',
         background: 'white',
       }
     },
@@ -26,6 +26,9 @@ let myChart = null
 onMounted(() => {
   // 基于准备好的dom，初始化echarts实例
   myChart = echarts.init(document.getElementById('echart', 'vintage'))
+  window.addEventListener('resize', () => {
+    myChart.resize()
+  })
 })
 
 function setOption(option) {

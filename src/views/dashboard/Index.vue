@@ -51,11 +51,11 @@
         <el-card class="box-card" shadow="never">
           <template #header>
             <div class="card-header">
-              <span>用户数</span>
+              <span>每时段用户流量趋势</span>
               <el-tag>今日数据</el-tag>
             </div>
           </template>
-          <V3Echarts ref="linechart" title="今日流量消耗情况"></V3Echarts>
+          <V3Echarts ref="linechart"></V3Echarts>
         </el-card>
       </el-col>
     </el-row>
