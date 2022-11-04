@@ -46,14 +46,35 @@
         </el-card>
       </el-col>
     </el-row>
+    <el-row>
+      <el-col :span="24">
+        <el-card class="box-card" shadow="never">
+          <template #header>
+            <div class="card-header">
+              <span>用户数</span>
+              <el-tag>今日数据</el-tag>
+            </div>
+          </template>
+          <V3Echarts ref="linechart" title="今日流量消耗情况"></V3Echarts>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
 import AnimateNumber from '@/components/AnimateNumber/Index'
+import V3Echarts from '@/components/Echarts/Index'
+
+import { useFlowData } from './hooks/useChart'
 
 const animateNumber = ref(null)
+
+const linechart = ref(null)
+const { loadData } = useFlowData()
+onMounted(() => {
+  loadData(linechart)
+})
 
 function update() {
   animateNumber.value.updateValue(67998)

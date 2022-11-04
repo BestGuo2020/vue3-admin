@@ -3,7 +3,7 @@ import router from '../router'
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
-  timeout: 1000,
+  timeout: 30000,
 })
 
 // 请求前的拦截处理
