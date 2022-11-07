@@ -22,8 +22,8 @@
     <Notification></Notification>
     <el-dropdown>
       <div class="brief-info">
-        <el-avatar class="brief-avater" :size="34" src="http://avatarurl">
-          <img :src="avatar" />
+        <el-avatar class="brief-avater" :size="34" :src="avatar">
+          <img src="@/assets/avatar.png" />
         </el-avatar>
         <span>BestGuo2020</span>
       </div>
