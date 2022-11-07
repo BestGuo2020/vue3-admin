@@ -59,6 +59,24 @@
         </el-card>
       </el-col>
     </el-row>
+    <el-row>
+      <el-col :span="8">
+        <el-card class="box-card" shadow="never">
+          <template #header>
+            <div class="card-header">
+              <span>用户来源</span>
+              <el-tag>今日数据</el-tag>
+            </div>
+          </template>
+          <V3Echarts
+            ref="linepie"
+            :custom-style="{ height: '200px' }"
+          ></V3Echarts>
+        </el-card>
+      </el-col>
+      <el-col :span="8"></el-col>
+      <el-col :span="8"></el-col>
+    </el-row>
   </div>
 </template>
 
@@ -66,14 +84,18 @@
 import AnimateNumber from '@/components/AnimateNumber/Index'
 import V3Echarts from '@/components/Echarts/Index'
 
-import { useFlowData } from './hooks/useChart'
+import { useFlowData, usePieData } from './hooks/useChart'
 
 const animateNumber = ref(null)
 
 const linechart = ref(null)
-const { loadData } = useFlowData()
+const linepie = ref(null)
+
+const { loadLineData } = useFlowData()
+const { loadPieData } = usePieData()
 onMounted(() => {
-  loadData(linechart)
+  loadLineData(linechart)
+  loadPieData(linepie)
 })
 
 function update() {
