@@ -20,27 +20,17 @@
       <i v-else class="fa fa-compress" aria-hidden="true"></i>
     </el-icon>
     <Notification></Notification>
-    <el-dropdown>
-      <div class="brief-info">
-        <el-avatar class="brief-avater" :size="34" :src="avatar">
-          <img src="@/assets/avatar.png" />
-        </el-avatar>
-        <span>BestGuo2020</span>
-      </div>
-      <template #dropdown>
-        <el-dropdown-menu>
-          <el-dropdown-item>退出登录</el-dropdown-item>
-        </el-dropdown-menu>
-      </template>
-    </el-dropdown>
+    <UserSettings></UserSettings>
   </div>
 </template>
 
 <script setup>
 import emitter from '@/utils/bus'
+import { ElDropdownItem } from 'element-plus'
 import screenfull from 'screenfull'
 
 import Notification from './Notification.vue'
+import UserSettings from './UserSettings.vue'
 
 // 定义并关闭左侧菜单折叠
 const collapse = ref(false)
@@ -48,9 +38,6 @@ function handleCollapse() {
   collapse.value = !collapse.value
   emitter.emit('collapse', collapse.value)
 }
-
-// 默认头像
-const avatar = 'https://avatars.githubusercontent.com/u/45250038?v=4'
 
 // 全屏
 let fullScreen = ref(false)
@@ -90,23 +77,6 @@ function toggleFullscreen() {
 .icon-notice {
   font-size: 20px;
   padding: 0 10px;
-}
-.brief-info {
-  padding-right: 15px;
-  font-size: 14px;
-  display: inline-flex;
-  height: 57px;
-  align-items: center;
-  cursor: pointer;
-}
-.brief-info:hover,
-.icon-collapse:hover,
-.icon-fullsceen:hover,
-.icon-notice:hover {
-  background-color: #f6f6f6;
-}
-.brief-avater {
-  margin: 0 8px 0 15px;
 }
 .icon-collapse {
   padding: 0 15px;
