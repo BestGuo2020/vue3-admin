@@ -70,6 +70,12 @@ function toggleFullscreen() {
   height: 100%;
   right: 20px;
 }
+.brief-info:hover,
+.icon-collapse:hover,
+.icon-fullsceen:hover,
+.icon-notice:hover {
+  background-color: #f6f6f6;
+}
 .icon-style {
   height: 100%;
   cursor: pointer;
