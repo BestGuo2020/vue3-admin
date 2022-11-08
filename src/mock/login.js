@@ -22,4 +22,14 @@ export default [
       }
     },
   },
+  {
+    url: '/api/logout',
+    method: 'get',
+    response: req => {
+      return {
+        code: 0,
+        msg: '退出成功！',
+      }
+    },
+  },
 ]

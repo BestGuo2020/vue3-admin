@@ -4,7 +4,7 @@
       <el-avatar class="brief-avater" :size="34" :src="userinfo.avatar">
         <img src="@/assets/avatar.png" />
       </el-avatar>
-      <span>BestGuo2020</span>
+      <span>{{ userinfo.username }}</span>
     </div>
     <template #dropdown>
       <el-dropdown-menu>
@@ -12,7 +12,7 @@
           <i class="fa-solid fa-user-gear"></i>
           <span>用户设置</span>
         </el-dropdown-item>
-        <el-dropdown-item divided>
+        <el-dropdown-item divided @click="logout">
           <i class="fa-solid fa-arrow-right-from-bracket"></i>
           <span>退出登录</span>
         </el-dropdown-item>
@@ -97,10 +97,12 @@
 </template>
 <script setup>
 import { useMainStore } from '@/store'
+import { useRouter } from 'vue-router'
 
 const userdrawer = ref(false)
 
 const mainStore = useMainStore()
+const router = useRouter()
 
 // 获取用户信息
 const userinfo = mainStore.userInfo
@@ -126,6 +128,28 @@ formData.role = mainStore.role
 
 function onSubmit() {
   console.log('数据保存')
+}
+
+function logout() {
+  ElMessageBox.confirm('确认要退出吗？', '注意', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning',
+  })
+    .then(() => {
+      console.log('触发退出')
+      mainStore.logout().then(res => {
+        if (res.code === 0) {
+          // 删除状态数据和本地存储的 token
+          localStorage.removeItem('role')
+          localStorage.removeItem('token')
+          mainStore.userInfo = null
+          mainStore.routeLoaded = false
+          router.push('/login')
+        }
+      })
+    })
+    .catch(() => {})
 }
 </script>
 <style lang="scss" scoped>

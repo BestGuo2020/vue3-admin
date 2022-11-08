@@ -8,7 +8,6 @@ export const useMainStore = defineStore('main', () => {
 
   function getUserInfo() {
     get('/api/userinfo', {}).then(res => {
-      console.log(res)
       if (res.code === 0) {
         userInfo.value = res.data
         role.value = res.data.roles[0].sign
@@ -18,5 +17,9 @@ export const useMainStore = defineStore('main', () => {
     })
   }
 
-  return { userInfo, routeLoaded, getUserInfo, role }
+  function logout() {
+    return get('/api/logout', {})
+  }
+
+  return { userInfo, routeLoaded, getUserInfo, role, logout }
 })
