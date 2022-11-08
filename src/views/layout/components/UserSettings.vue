@@ -145,7 +145,7 @@ function logout() {
           localStorage.removeItem('token')
           mainStore.userInfo = null
           mainStore.routeLoaded = false
-          router.push('/login')
+          location.reload()
         }
       })
     })
