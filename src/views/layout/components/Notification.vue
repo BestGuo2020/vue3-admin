@@ -167,9 +167,6 @@ function handleDeleteAll() {
   padding-bottom: 16px;
   font-size: 16px;
 }
-:deep(.el-card__header) {
-  padding: 4px 10px;
-}
 .el-scrollbar {
   height: 87.0991249%;
 }
