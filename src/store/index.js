@@ -7,11 +7,12 @@ export const useMainStore = defineStore('main', () => {
 
   function getUserInfo() {
     get('/api/userinfo', {}).then(res => {
+      console.log(res)
       if (res.code === 0) {
         userInfo.value = res.data
       }
     })
   }
 
-  return { userInfo, routeLoaded }
+  return { userInfo, routeLoaded, getUserInfo }
 })

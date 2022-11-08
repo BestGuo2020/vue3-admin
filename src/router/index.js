@@ -19,7 +19,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const mainState = useMainStore()
+  const mainStore = useMainStore()
 
   NProgress.start()
   // 设置浏览器 title
@@ -29,7 +29,7 @@ router.beforeEach((to, from, next) => {
   // token 有没有
   if (token) {
     // 路由信息是否加载完成
-    if (mainState.routeLoaded) {
+    if (mainStore.routeLoaded) {
       // 但是还在登录页，直接跳回主页
       if (to.path === '/login') {
         next({ path: '/', replace: true })
@@ -42,10 +42,12 @@ router.beforeEach((to, from, next) => {
         res.forEach(item => {
           router.addRoute(item)
         })
-        mainState.routeLoaded = true
+        mainStore.routeLoaded = true
         next({ ...to, replace: true })
       })
     }
+    // 获取用户信息
+    mainStore.getUserInfo()
   } else {
     // token 没有，就找找白名单中的
     if (whitelist.indexOf(to.path) !== -1) {
