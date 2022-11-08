@@ -5,6 +5,8 @@ import router from './router'
 import Particles from 'particles.vue3'
 import { createPinia } from 'pinia'
 
+import './router/interceptor'
+
 import 'animate.css'
 import './assets/custom/custom.css'
 
