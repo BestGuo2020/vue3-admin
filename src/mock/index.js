@@ -7,7 +7,7 @@ export default [
   // 模拟获取用户信息
   {
     url: '/api/userinfo',
-    method: 'post',
+    method: 'get',
     response: req => {
       if (req.headers.token) {
         return {
