@@ -26,7 +26,6 @@
     direction="rtl"
   >
     <div class="drawer-title">用户设置</div>
-    <!-- 头像信息 -->
     <el-row>
       <el-col :span="24" style="height: 172px">
         <el-avatar
@@ -49,6 +48,7 @@
         </el-upload>
       </el-col>
       <el-col :span="24">
+        <el-divider>角色切换</el-divider>
         <el-form label-width="80px" label-position="left">
           <el-form-item label="当前角色">
             <el-select v-model="userinfo.role">
@@ -71,7 +71,8 @@
             </el-tooltip>
           </el-form-item>
         </el-form>
-        <el-form label-position="left" label-width="80px" :model="userinfo">
+        <el-divider>用户信息</el-divider>
+        <el-form label-position="top" label-width="80px" :model="userinfo">
           <el-form-item label="用户名">
             <el-input v-model="userinfo.username" />
           </el-form-item>
