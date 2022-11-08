@@ -27,7 +27,8 @@
   >
     <div class="drawer-title">用户设置</div>
     <el-row>
-      <el-col :span="24" style="height: 172px">
+      <el-col :span="24" style="height: 200px">
+        <el-divider>头像修改</el-divider>
         <el-avatar
           v-if="userinfo.avatar"
           class="settings-avatar"
@@ -148,7 +149,6 @@ function onSubmit() {
   transform: translateX(-50%);
 }
 .drawer-title {
-  padding-bottom: 16px;
   font-size: 16px;
 }
 .upload-btn {
