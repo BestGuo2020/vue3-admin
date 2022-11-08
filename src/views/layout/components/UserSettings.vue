@@ -51,13 +51,13 @@
         <el-divider>角色切换</el-divider>
         <el-form label-width="80px" label-position="left">
           <el-form-item label="当前角色">
-            <el-select v-model="userinfo.role">
+            <el-select v-model="formData.role">
               <el-option
                 v-for="item in userinfo.roles"
-                :key="item"
-                :label="item"
-                :value="item"
-                >{{ item }}</el-option
+                :key="item.sign"
+                :label="item.name"
+                :value="item.sign"
+                >{{ item.name }}</el-option
               >
             </el-select>
             <el-tooltip
@@ -72,12 +72,19 @@
           </el-form-item>
         </el-form>
         <el-divider>用户信息</el-divider>
-        <el-form label-position="top" label-width="80px" :model="userinfo">
+        <el-form
+          label-position="top"
+          label-width="80px"
+          :model="formData.userinfo"
+        >
           <el-form-item label="用户名">
-            <el-input v-model="userinfo.username" />
+            <el-input v-model="formData.userinfo.username" />
+          </el-form-item>
+          <el-form-item label="邮箱">
+            <el-input v-model="formData.userinfo.email" />
           </el-form-item>
           <el-form-item label="年龄">
-            <el-input value="24" />
+            <el-input v-model="formData.userinfo.age" />
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">保存</el-button>
@@ -97,6 +104,24 @@ const mainStore = useMainStore()
 // 获取用户信息
 const userinfo = mainStore.userInfo
 console.log(userinfo)
+
+// 表单数据
+const formData = reactive({
+  userinfo: {
+    username: '',
+    email: '',
+    age: '',
+  },
+  role: '',
+})
+
+formData.userinfo = {
+  username: userinfo.username,
+  email: userinfo.email,
+  age: userinfo.age,
+}
+
+formData.role = mainStore.role
 
 function onSubmit() {
   console.log('数据保存')

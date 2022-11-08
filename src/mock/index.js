@@ -15,7 +15,18 @@ export default [
           msg: '',
           data: {
             username: 'admin',
-            roles: ['admin'],
+            email: 'hi@example.com',
+            age: 24,
+            roles: [
+              {
+                name: '系统管理员',
+                sign: 'admin',
+              },
+              {
+                name: '来宾',
+                sign: 'guest',
+              },
+            ],
             avatar: 'https://avatars.githubusercontent.com/u/45250038?v=4',
             token: 'bestguo2020',
           },
