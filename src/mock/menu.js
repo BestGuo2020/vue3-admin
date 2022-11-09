@@ -8,6 +8,7 @@
  * type：类别（1-菜单、2-后端 url）
  * fullpath：完整的路径
  * children：子菜单
+ * enabled：启用
  */
 const menus = [
   {
@@ -18,6 +19,7 @@ const menus = [
     icon: 'fa-solid fa-house',
     type: 1,
     fullpath: '/',
+    enabled: true,
     children: [
       {
         id: 2,
@@ -27,6 +29,7 @@ const menus = [
         type: 1,
         path: 'dashboard',
         fullpath: '/dashboard',
+        enabled: true,
       },
     ],
   },
@@ -38,6 +41,7 @@ const menus = [
     icon: 'fa-solid fa-gears',
     type: 1,
     fullpath: '/system',
+    enabled: true,
     children: [
       {
         id: 4,
@@ -47,6 +51,7 @@ const menus = [
         title: '用户管理',
         path: 'user',
         fullpath: '/system/user',
+        enabled: true,
       },
       {
         id: 5,
@@ -56,6 +61,7 @@ const menus = [
         path: 'role',
         title: '角色管理',
         fullpath: '/system/role',
+        enabled: true,
       },
       {
         id: 6,
@@ -65,6 +71,7 @@ const menus = [
         path: 'power',
         title: '菜单管理',
         fullpath: '/system/power',
+        enabled: true,
       },
     ],
   },
