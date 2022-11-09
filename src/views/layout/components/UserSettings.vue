@@ -24,6 +24,8 @@
     :show-close="false"
     :with-header="false"
     direction="rtl"
+    @open="load"
+    @closed="unload"
   >
     <div class="drawer-title">用户设置</div>
     <el-row>
@@ -118,13 +120,27 @@ const formData = reactive({
   role: '',
 })
 
-formData.userinfo = {
-  username: userinfo.username,
-  email: userinfo.email,
-  age: userinfo.age,
+// 打开抽屉，装载数据
+function load() {
+  formData.userinfo = {
+    username: userinfo.username,
+    email: userinfo.email,
+    age: userinfo.age,
+  }
+
+  formData.role = mainStore.role
 }
 
-formData.role = mainStore.role
+// 关闭抽屉，卸载数据
+function unload() {
+  formData.userinfo = {
+    username: '',
+    email: '',
+    age: '',
+  }
+
+  formData.role = ''
+}
 
 function onSubmit() {
   console.log('数据保存')
