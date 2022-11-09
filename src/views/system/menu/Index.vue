@@ -49,6 +49,12 @@
               <span :class="scope.row.icon"></span>
             </template>
           </el-table-column>
+          <el-table-column label="状态" width="100">
+            <template #default="scope">
+              <el-tag v-if="scope.row.enabled" type="success">启用</el-tag>
+              <el-tag v-else type="danger">禁用</el-tag>
+            </template>
+          </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template #default="scope">
               <el-button
