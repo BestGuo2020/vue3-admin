@@ -162,8 +162,8 @@ const modalStatus = reactive({
   dialogFormVisible: false,
   // 定义的对话框标题对象
   titles: {
-    add: '添加用户信息',
-    edit: '修改用户信息',
+    add: '添加角色信息',
+    edit: '修改角色信息',
   },
   status: '', // 对应的 key
 })
