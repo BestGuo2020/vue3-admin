@@ -4,7 +4,8 @@ import { get } from '../request/utils'
 export const useMainStore = defineStore('main', () => {
   let userInfo = ref({}) // 用户信息
   let routeLoaded = ref(false) // 路由是否加载完成
-  let role = ref(localStorage.getItem('role'))
+  let role = ref(localStorage.getItem('role')) // 当前的角色
+  let removeRouteList = ref([]) // 路由添加之后的回调
 
   function getUserInfo() {
     get('/api/userinfo', {}).then(res => {
@@ -21,5 +22,5 @@ export const useMainStore = defineStore('main', () => {
     return get('/api/logout', {})
   }
 
-  return { userInfo, routeLoaded, getUserInfo, role, logout }
+  return { userInfo, routeLoaded, getUserInfo, role, logout, removeRouteList }
 })

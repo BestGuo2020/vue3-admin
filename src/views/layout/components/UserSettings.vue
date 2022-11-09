@@ -143,9 +143,15 @@ function logout() {
           // 删除状态数据和本地存储的 token
           localStorage.removeItem('role')
           localStorage.removeItem('token')
-          mainStore.userInfo = null
           mainStore.routeLoaded = false
-          location.reload()
+          // 取出添加时的回调方法，调用就可删除
+          const removeRouterList = mainStore.removeRouteList
+          let removeRouter
+          while ((removeRouter = removeRouterList.pop()) !== undefined) {
+            removeRouter()
+          }
+          // 回到登录
+          router.push('/login')
         }
       })
     })

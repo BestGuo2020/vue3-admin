@@ -36,7 +36,8 @@ router.beforeEach((to, from, next) => {
       // 没有就获取路由数据并动态添加，并设置为加载完成
       generateRoutes().then(res => {
         res.forEach(item => {
-          router.addRoute(item)
+          // 将添加后的路由回调存到数组中，方便退出登录时清空
+          mainStore.removeRouteList.push(router.addRoute(item))
         })
         mainStore.routeLoaded = true
         next({ ...to, replace: true })
