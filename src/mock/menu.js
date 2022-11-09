@@ -69,7 +69,7 @@ const menus = [
         icon: 'fa-regular fa-circle',
         type: 1,
         path: 'power',
-        title: '菜单管理',
+        title: '权限管理',
         fullpath: '/system/power',
         enabled: true,
       },
