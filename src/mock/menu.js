@@ -5,6 +5,7 @@
  * title：菜单标题
  * path：路径名称
  * icon：css 图标样式，当前后台使用 font-awesome6
+ * type：类别（1-菜单、2-后端 url）
  * fullpath：完整的路径
  * children：子菜单
  */
@@ -15,6 +16,7 @@ const menus = [
     title: '主页',
     path: '/',
     icon: 'fa-solid fa-house',
+    type: 1,
     fullpath: '/',
     children: [
       {
@@ -22,6 +24,7 @@ const menus = [
         sign: 'dashboard',
         title: '仪表板',
         icon: 'fa-solid fa-gauge',
+        type: 1,
         path: 'dashboard',
         fullpath: '/dashboard',
       },
@@ -33,12 +36,14 @@ const menus = [
     title: '系统设置',
     path: '/system',
     icon: 'fa-solid fa-gears',
+    type: 1,
     fullpath: '/system',
     children: [
       {
         id: 4,
         sign: 'user',
         icon: 'fa-regular fa-user',
+        type: 1,
         title: '用户管理',
         path: 'user',
         fullpath: '/system/user',
@@ -47,6 +52,7 @@ const menus = [
         id: 5,
         sign: 'role',
         icon: 'fa-regular fa-circle',
+        type: 1,
         path: 'role',
         title: '角色管理',
         fullpath: '/system/role',
@@ -55,6 +61,7 @@ const menus = [
         id: 6,
         sign: 'power',
         icon: 'fa-regular fa-circle',
+        type: 1,
         path: 'power',
         title: '菜单管理',
         fullpath: '/system/power',
