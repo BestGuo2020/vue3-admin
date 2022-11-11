@@ -76,21 +76,25 @@
         </el-form>
         <el-divider>用户信息</el-divider>
         <el-form
+          ref="settingFormRef"
           label-position="top"
           label-width="80px"
           :model="formData.userinfo"
+          :rules="rules"
         >
-          <el-form-item label="用户名">
+          <el-form-item label="用户名" prop="username">
             <el-input v-model="formData.userinfo.username" />
           </el-form-item>
-          <el-form-item label="邮箱">
+          <el-form-item label="邮箱" prop="email">
             <el-input v-model="formData.userinfo.email" />
           </el-form-item>
-          <el-form-item label="年龄">
+          <el-form-item label="年龄" prop="age">
             <el-input v-model="formData.userinfo.age" />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onSubmit">保存</el-button>
+            <el-button type="primary" @click="onSubmit(settingFormRef)">
+              保存
+            </el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -100,51 +104,19 @@
 <script setup>
 import { useMainStore } from '@/store'
 import { useRouter } from 'vue-router'
+import { saveUserInfo } from '../hooks/useSettings'
 
 const userdrawer = ref(false)
 
 const mainStore = useMainStore()
 const router = useRouter()
 
-// 获取用户信息
+// 用户信息和角色
 const userinfo = mainStore.userInfo
-console.log(userinfo)
+const role = mainStore.role
 
-// 表单数据
-const formData = reactive({
-  userinfo: {
-    username: '',
-    email: '',
-    age: '',
-  },
-  role: '',
-})
-
-// 打开抽屉，装载数据
-function load() {
-  formData.userinfo = {
-    username: userinfo.username,
-    email: userinfo.email,
-    age: userinfo.age,
-  }
-
-  formData.role = mainStore.role
-}
-
-// 关闭抽屉，卸载数据
-function unload() {
-  formData.userinfo = {
-    username: '',
-    email: '',
-    age: '',
-  }
-
-  formData.role = ''
-}
-
-function onSubmit() {
-  console.log('数据保存')
-}
+const { rules, formData, settingFormRef, load, unload, onSubmit } =
+  saveUserInfo(userinfo, role)
 
 function logout() {
   ElMessageBox.confirm('确认要退出吗？', '注意', {
