@@ -36,6 +36,8 @@
           class="settings-avatar"
           :size="150"
           :src="userinfo.avatar"
+          :on-success="uploadSuccess"
+          :on-error="uploadError"
         ></el-avatar>
         <el-avatar v-else class="settings-avatar" :size="150">
           {{ userinfo.username }}
@@ -108,7 +110,7 @@
 <script setup>
 import { useMainStore } from '@/store'
 import { useRouter } from 'vue-router'
-import { saveUserInfo } from '../hooks/useSettings'
+import { avatarUpload, saveUserInfo } from '../hooks/useSettings'
 
 const userdrawer = ref(false)
 
@@ -119,6 +121,7 @@ const router = useRouter()
 const userinfo = mainStore.userInfo
 const role = mainStore.role
 
+const { uploadSuccess, uploadError } = avatarUpload()
 const { rules, formData, settingFormRef, load, unload, onSubmit, changeRole } =
   saveUserInfo(userinfo, role, userdrawer)
 

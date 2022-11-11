@@ -1,3 +1,15 @@
+export function avatarUpload() {
+  function uploadSuccess(resp) {
+    console.log('上传成功', resp)
+  }
+
+  function uploadError(error) {
+    console.log('上传失败', error)
+  }
+
+  return { uploadSuccess, uploadError }
+}
+
 export function saveUserInfo(userinfo, role, userdrawer) {
   // 校验
   const rules = {
