@@ -117,7 +117,7 @@ const userinfo = mainStore.userInfo
 const role = mainStore.role
 
 const { rules, formData, settingFormRef, load, unload, onSubmit } =
-  saveUserInfo(userinfo, role)
+  saveUserInfo(userinfo, role, userdrawer)
 
 // 退出登录操作
 function logout() {

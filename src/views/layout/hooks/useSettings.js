@@ -1,4 +1,4 @@
-export function saveUserInfo(userinfo, role) {
+export function saveUserInfo(userinfo, role, userdrawer) {
   // 校验
   const rules = {
     username: [
@@ -66,6 +66,7 @@ export function saveUserInfo(userinfo, role) {
       console.log(valid)
       if (valid) {
         console.log('数据保存')
+        userdrawer.value = false
       }
     })
   }
