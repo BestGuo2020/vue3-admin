@@ -1,3 +1,5 @@
+import commonValidate from '@/utils/validator-common'
+
 export function avatarUpload() {
   function uploadSuccess(resp) {
     console.log('上传成功', resp)
@@ -13,30 +15,8 @@ export function avatarUpload() {
 export function saveUserInfo(userinfo, role, userdrawer) {
   // 校验
   const rules = {
-    username: [
-      {
-        required: true,
-        message: '该项为必须填',
-        trigger: 'blur',
-      },
-    ],
-    email: [
-      {
-        required: true,
-        message: '该项为必须填',
-        trigger: 'blur',
-      },
-      {
-        validator: (rule, value, callback) => {
-          const regex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
-          if (!regex.test(value)) {
-            return callback(new Error('邮箱格式不正确'))
-          }
-          return callback()
-        },
-        trigger: 'blur',
-      },
-    ],
+    username: [commonValidate.required],
+    email: [commonValidate.required, commonValidate.email],
     age: [{ required: false }],
   }
 
