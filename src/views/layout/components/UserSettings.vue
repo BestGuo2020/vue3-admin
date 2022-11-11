@@ -36,7 +36,8 @@
           class="settings-avatar"
           :size="150"
           :src="userinfo.avatar"
-        >
+        ></el-avatar>
+        <el-avatar v-else class="settings-avatar" :size="150">
           {{ userinfo.username }}
         </el-avatar>
         <el-upload
@@ -118,6 +119,7 @@ const role = mainStore.role
 const { rules, formData, settingFormRef, load, unload, onSubmit } =
   saveUserInfo(userinfo, role)
 
+// 退出登录操作
 function logout() {
   ElMessageBox.confirm('确认要退出吗？', '注意', {
     confirmButtonText: '确认',
