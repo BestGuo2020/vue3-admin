@@ -69,7 +69,10 @@
               placement="top-start"
               effect="dark"
             >
-              <el-button style="margin-left: 10px" type="primary"
+              <el-button
+                style="margin-left: 10px"
+                type="primary"
+                @click="changeRole"
                 >切换</el-button
               >
             </el-tooltip>
@@ -116,7 +119,7 @@ const router = useRouter()
 const userinfo = mainStore.userInfo
 const role = mainStore.role
 
-const { rules, formData, settingFormRef, load, unload, onSubmit } =
+const { rules, formData, settingFormRef, load, unload, onSubmit, changeRole } =
   saveUserInfo(userinfo, role, userdrawer)
 
 // 退出登录操作

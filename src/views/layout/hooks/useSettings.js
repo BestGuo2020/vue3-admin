@@ -61,6 +61,7 @@ export function saveUserInfo(userinfo, role, userdrawer) {
     formData.role = ''
   }
 
+  // 提交用户信息
   function onSubmit(formEl) {
     formEl.validate(valid => {
       console.log(valid)
@@ -71,5 +72,12 @@ export function saveUserInfo(userinfo, role, userdrawer) {
     })
   }
 
-  return { rules, formData, settingFormRef, load, unload, onSubmit }
+  // 改变角色
+  function changeRole() {
+    // todo
+    console.log('角色变更')
+    location.reload()
+  }
+
+  return { rules, formData, settingFormRef, load, unload, onSubmit, changeRole }
 }
