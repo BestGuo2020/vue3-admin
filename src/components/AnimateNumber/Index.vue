@@ -1,5 +1,5 @@
 <template>
-  <div ref="number"></div>
+  <div ref="number" class="font-style"></div>
 </template>
 
 <script setup>
@@ -35,4 +35,8 @@ function updateValue(value) {
 // 给其它组件使用时本组件的方法时，直接暴露出来
 defineExpose({ updateValue })
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.font-style {
+  font-size: 1.6rem;
+}
+</style>
