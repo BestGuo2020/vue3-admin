@@ -75,6 +75,28 @@ const menus = [
       },
     ],
   },
+  {
+    id: 7,
+    sign: 'root',
+    title: '组件',
+    path: '/component',
+    icon: 'fa-solid fa-pen-ruler',
+    type: 1,
+    fullpath: '/component',
+    enabled: true,
+    children: [
+      {
+        id: 8,
+        sign: 'editor',
+        icon: 'fa-regular fa-edit',
+        type: 1,
+        title: '富文本编辑器',
+        path: 'editor',
+        fullpath: '/component/editor',
+        enabled: true,
+      },
+    ],
+  },
 ]
 
 export default [

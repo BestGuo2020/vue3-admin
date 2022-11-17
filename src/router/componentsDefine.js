@@ -11,4 +11,6 @@ export const components = {
   user: () => import('@/views/system/user/Index'),
   role: () => import('@/views/system/role/Index'),
   power: () => import('@/views/system/menu/Index'),
+  // 编辑器
+  editor: () => import('@/views/third-component/editor/Index'),
 }
