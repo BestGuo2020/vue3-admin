@@ -7,7 +7,7 @@
         <!-- 遍历子菜单项只有一个，子菜单只有一个的话，那么就直接取出子菜单项，不需要展开 -->
         <el-menu-item
           v-if="item.children && item.children.length === 1"
-          :index="'/' + item.children[0].path"
+          :index="item.path + '/' + item.children[0].path"
         >
           <el-icon :class="[item.meta.icon, 'icon-size']"></el-icon>
           <span>{{ item.children[0].meta.title }}</span>
